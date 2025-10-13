@@ -12,6 +12,8 @@
 
 โดยทุกครั้งที่สร้าง page.tsx ต้องทำตาม rule ที่เขียนไว้ที่ /Users/marosdeeuma/next-edu-nextjs/prompt/CREATE_PAGE_PATTERN.md
 
+ถ้าหาก TODO มีเนื้อหาเยอะเกนิไป ให้เขียนแยก TODO_FEATURES ออกมา
+
 - copy prompt ที่มีอยู่ใน timeluxe-nextjs
 - อัพเดต package.json
 - อัพเดต landing page
