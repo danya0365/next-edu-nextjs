@@ -70,8 +70,23 @@ export function useChallengeDetailPresenter(
 
       await ChallengeDetailPresenter.joinChallenge(challengeId, user.userId);
 
-      // Reload data to get updated progress
-      await loadData();
+      // Update local state immediately for better UX
+      if (viewModel && !viewModel.userProgress) {
+        const updatedViewModel = {
+          ...viewModel,
+          userProgress: {
+            challengeId,
+            userId: user.userId,
+            status: "in_progress" as const,
+            progress: 0,
+            completedTasks: [],
+            earnedPoints: 0,
+            earnedXp: 0,
+            startedAt: new Date().toISOString(),
+          },
+        };
+        setViewModel(updatedViewModel);
+      }
     } catch (err) {
       console.error("Error joining challenge:", err);
       setError(
@@ -82,7 +97,7 @@ export function useChallengeDetailPresenter(
     } finally {
       setIsJoining(false);
     }
-  }, [challengeId, user?.userId, loadData]);
+  }, [challengeId, user?.userId, viewModel]);
 
   // Complete task
   const completeTask = useCallback(
@@ -102,8 +117,53 @@ export function useChallengeDetailPresenter(
           user.userId
         );
 
-        // Reload data to get updated progress
-        await loadData();
+        // Update local state immediately for better UX
+        if (viewModel) {
+          const updatedViewModel = { ...viewModel };
+          
+          // Update or create user progress
+          if (!updatedViewModel.userProgress) {
+            updatedViewModel.userProgress = {
+              challengeId,
+              userId: user.userId,
+              status: "in_progress",
+              progress: 0,
+              completedTasks: [],
+              earnedPoints: 0,
+              earnedXp: 0,
+              startedAt: new Date().toISOString(),
+            };
+          }
+
+          // Add task to completed tasks if not already there
+          if (!updatedViewModel.userProgress.completedTasks.includes(taskId)) {
+            updatedViewModel.userProgress.completedTasks = [
+              ...updatedViewModel.userProgress.completedTasks,
+              taskId,
+            ];
+
+            // Find the task to get points
+            const task = viewModel.challenge.tasks.find((t) => t.id === taskId);
+            if (task) {
+              updatedViewModel.userProgress.earnedPoints += task.points;
+            }
+
+            // Calculate new progress
+            const totalTasks = viewModel.challenge.tasks.length;
+            const completedCount = updatedViewModel.userProgress.completedTasks.length;
+            updatedViewModel.userProgress.progress = Math.round(
+              (completedCount / totalTasks) * 100
+            );
+
+            // Check if all tasks completed
+            if (completedCount === totalTasks) {
+              updatedViewModel.userProgress.status = "completed";
+              updatedViewModel.userProgress.completedAt = new Date().toISOString();
+            }
+          }
+
+          setViewModel(updatedViewModel);
+        }
       } catch (err) {
         console.error("Error completing task:", err);
         setError(
@@ -115,7 +175,7 @@ export function useChallengeDetailPresenter(
         setIsCompletingTask(false);
       }
     },
-    [challengeId, user?.userId, loadData]
+    [challengeId, user?.userId, viewModel]
   );
 
   // Refresh data
