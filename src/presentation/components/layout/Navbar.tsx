@@ -76,6 +76,7 @@ export function Navbar() {
     document.documentElement.classList.toggle("dark", newDarkMode);
   };
 
+  // Navigation links
   const navLinks = [
     { href: "/", label: "หน้าแรก" },
     { href: "/courses", label: "คอร์สทั้งหมด" },
@@ -87,8 +88,35 @@ export function Navbar() {
           { href: "/leaderboard", label: "อันดับ" },
         ]
       : []),
-    { href: "/about", label: "เกี่ยวกับเรา" },
-    { href: "/contact", label: "ติดต่อเรา" },
+  ];
+
+  // User menu items
+  const userMenuItems = [
+    {
+      href: "/profile",
+      label: "โปรไฟล์",
+      icon: User,
+    },
+    {
+      href: "/dashboard/student/courses",
+      label: "คอร์สของฉัน",
+      icon: BookOpen,
+    },
+    {
+      href: "/dashboard/student/certificates",
+      label: "ใบประกาศนียบัตร",
+      icon: Award,
+    },
+    {
+      href: "/dashboard/student/wishlist",
+      label: "Wishlist",
+      icon: Heart,
+    },
+    {
+      href: "/dashboard/student/settings",
+      label: "ตั้งค่า",
+      icon: Settings,
+    },
   ];
 
   return (
@@ -172,47 +200,20 @@ export function Navbar() {
                 {/* Dropdown Menu */}
                 {showUserMenu && (
                   <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
-                    <Link
-                      href="/profile"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <User className="w-4 h-4" />
-                      <span>โปรไฟล์</span>
-                    </Link>
-                    <Link
-                      href="/dashboard/student/courses"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <BookOpen className="w-4 h-4" />
-                      <span>คอร์สของฉัน</span>
-                    </Link>
-                    <Link
-                      href="/dashboard/student/certificates"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <Award className="w-4 h-4" />
-                      <span>ใบประกาศนียบัตร</span>
-                    </Link>
-                    <Link
-                      href="/dashboard/student/wishlist"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <Heart className="w-4 h-4" />
-                      <span>Wishlist</span>
-                    </Link>
-                    <hr className="my-2 border-gray-200 dark:border-gray-700" />
-                    <Link
-                      href="/dashboard/student/settings"
-                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <Settings className="w-4 h-4" />
-                      <span>ตั้งค่า</span>
-                    </Link>
+                    {userMenuItems.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <Icon className="w-4 h-4" />
+                          <span>{item.label}</span>
+                        </Link>
+                      );
+                    })}
                     <hr className="my-2 border-gray-200 dark:border-gray-700" />
                     <button
                       onClick={() => {
@@ -281,6 +282,7 @@ export function Navbar() {
       {isMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
           <div className="px-4 py-4 space-y-3">
+            {/* Navigation Links */}
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -291,21 +293,81 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Auth Section */}
             <div className="pt-3 border-t border-gray-200 dark:border-gray-800 space-y-3">
-              <Link
-                href="/login"
-                onClick={() => setIsMenuOpen(false)}
-                className="block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-              >
-                เข้าสู่ระบบ
-              </Link>
-              <Link
-                href="/register"
-                onClick={() => setIsMenuOpen(false)}
-                className="block py-2 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-center"
-              >
-                สมัครสมาชิก
-              </Link>
+              {isAuthenticated && user ? (
+                <>
+                  {/* User Profile Section */}
+                  <div className="flex items-center gap-3 py-2 px-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <ImageWithFallback
+                      src={user.avatar}
+                      alt={user.displayName}
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                      fallbackElement={
+                        <AvatarFallback name={user.displayName} size={40} />
+                      }
+                    />
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {user.displayName}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* User Menu Items */}
+                  {userMenuItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center gap-3 py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      >
+                        <Icon className="w-5 h-5" />
+                        <span>{item.label}</span>
+                      </Link>
+                    );
+                  })}
+
+                  {/* Logout Button */}
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center gap-3 py-2 px-3 w-full text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    <span>ออกจากระบบ</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* Login & Register for Non-authenticated Users */}
+                  <Link
+                    href="/login"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-3 py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    <User className="w-5 h-5" />
+                    <span>เข้าสู่ระบบ</span>
+                  </Link>
+                  <Link
+                    href="/register"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block py-2 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-center hover:shadow-lg transition-all"
+                  >
+                    สมัครสมาชิก
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
