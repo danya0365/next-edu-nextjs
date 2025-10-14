@@ -1,52 +1,70 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "../../stores/authStore";
 import {
   ClientStudentDashboardPresenterFactory,
   type StudentDashboardViewModel,
-} from './StudentDashboardPresenter';
+} from "./StudentDashboardPresenter";
 
 export function useStudentDashboardPresenter(
-  initialViewModel?: StudentDashboardViewModel,
-  userId?: string
+  initialViewModel?: StudentDashboardViewModel
 ) {
+  const { isAuthenticated, user } = useAuthStore();
+  const router = useRouter();
   const [viewModel, setViewModel] = useState<StudentDashboardViewModel | null>(
     initialViewModel || null
   );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
 
+  // Check authentication
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
   // Load data
   useEffect(() => {
-    if (!userId || initialViewModel) return;
+    if (!user?.userId || initialViewModel) return;
 
     const loadData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await ClientStudentDashboardPresenterFactory.create(userId);
+        const data = await ClientStudentDashboardPresenterFactory.create(
+          user.userId
+        );
         setViewModel(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาดในการโหลดข้อมูล');
+        setError(
+          err instanceof Error ? err.message : "เกิดข้อผิดพลาดในการโหลดข้อมูล"
+        );
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [userId, initialViewModel]);
+  }, [user?.userId, initialViewModel]);
 
   // Refresh data
   const refresh = async () => {
-    if (!userId) return;
+    if (!user?.userId) return;
 
     try {
       setLoading(true);
       setError(null);
-      const data = await ClientStudentDashboardPresenterFactory.create(userId);
+      const data = await ClientStudentDashboardPresenterFactory.create(
+        user.userId
+      );
       setViewModel(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาดในการโหลดข้อมูล');
+      setError(
+        err instanceof Error ? err.message : "เกิดข้อผิดพลาดในการโหลดข้อมูล"
+      );
     } finally {
       setLoading(false);
     }

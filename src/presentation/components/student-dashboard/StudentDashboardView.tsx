@@ -1,29 +1,31 @@
-'use client';
+"use client";
 
-import { AvatarFallback } from '@/src/presentation/components/common/AvatarFallback';
-import { ImageWithFallback } from '@/src/presentation/components/common/ImageWithFallback';
-import { useStudentDashboardPresenter } from '@/src/presentation/presenters/student-dashboard/useStudentDashboardPresenter';
-import type { StudentDashboardViewModel } from '@/src/presentation/presenters/student-dashboard/StudentDashboardPresenter';
+import { AvatarFallback } from "@/src/presentation/components/common/AvatarFallback";
+import { ImageWithFallback } from "@/src/presentation/components/common/ImageWithFallback";
+import type { StudentDashboardViewModel } from "@/src/presentation/presenters/student-dashboard/StudentDashboardPresenter";
+import { useStudentDashboardPresenter } from "@/src/presentation/presenters/student-dashboard/useStudentDashboardPresenter";
 import {
-  BookOpen,
   Award,
-  TrendingUp,
-  Target,
-  Clock,
+  BookOpen,
   ChevronRight,
+  Clock,
   Play,
-  Star,
   Sparkles,
-} from 'lucide-react';
-import Link from 'next/link';
+  Star,
+  Target,
+  TrendingUp,
+} from "lucide-react";
+import Link from "next/link";
 
 interface StudentDashboardViewProps {
   initialViewModel?: StudentDashboardViewModel;
-  userId?: string;
 }
 
-export function StudentDashboardView({ initialViewModel, userId }: StudentDashboardViewProps) {
-  const { viewModel, loading, error } = useStudentDashboardPresenter(initialViewModel, userId);
+export function StudentDashboardView({
+  initialViewModel,
+}: StudentDashboardViewProps) {
+  const { viewModel, loading, error } =
+    useStudentDashboardPresenter(initialViewModel);
 
   if (loading && !viewModel) {
     return (
@@ -43,13 +45,16 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             เกิดข้อผิดพลาด
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">{error || 'ไม่พบข้อมูล'}</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            {error || "ไม่พบข้อมูล"}
+          </p>
         </div>
       </div>
     );
   }
 
-  const { stats, continueLearning, recommendedCourses, recentAchievements } = viewModel;
+  const { stats, continueLearning, recommendedCourses, recentAchievements } =
+    viewModel;
 
   // Calculate progress to next level
   const nextLevelPoints = stats.currentLevel * 1000;
@@ -77,7 +82,9 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                 <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">คอร์สที่เรียน</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              คอร์สที่เรียน
+            </p>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               {stats.enrolledCourses}
             </p>
@@ -90,7 +97,9 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                 <Award className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">จบแล้ว</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              จบแล้ว
+            </p>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               {stats.completedCourses}
             </p>
@@ -103,10 +112,14 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                 <Clock className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">เวลาเรียน</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              เวลาเรียน
+            </p>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               {stats.totalLearningTime}
-              <span className="text-lg text-gray-500 dark:text-gray-400 ml-1">ชม.</span>
+              <span className="text-lg text-gray-500 dark:text-gray-400 ml-1">
+                ชม.
+              </span>
             </p>
           </div>
 
@@ -117,10 +130,14 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                 <Target className="w-6 h-6 text-orange-600 dark:text-orange-400" />
               </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Streak</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              Streak
+            </p>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               {stats.currentStreak}
-              <span className="text-lg text-gray-500 dark:text-gray-400 ml-1">วัน</span>
+              <span className="text-lg text-gray-500 dark:text-gray-400 ml-1">
+                วัน
+              </span>
             </p>
           </div>
         </div>
@@ -134,12 +151,16 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
               </div>
               <div>
                 <p className="text-white/90 text-sm">ระดับปัจจุบัน</p>
-                <p className="text-3xl font-bold text-white">Level {stats.currentLevel}</p>
+                <p className="text-3xl font-bold text-white">
+                  Level {stats.currentLevel}
+                </p>
               </div>
             </div>
             <div className="text-right">
               <p className="text-white/90 text-sm">คะแนนทั้งหมด</p>
-              <p className="text-2xl font-bold text-white">{stats.totalPoints}</p>
+              <p className="text-2xl font-bold text-white">
+                {stats.totalPoints}
+              </p>
             </div>
           </div>
           <div className="relative">
@@ -150,7 +171,8 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
               />
             </div>
             <p className="text-white/90 text-sm mt-2">
-              อีก {nextLevelPoints - (stats.totalPoints % 1000)} คะแนนถึง Level {stats.currentLevel + 1}
+              อีก {nextLevelPoints - (stats.totalPoints % 1000)} คะแนนถึง Level{" "}
+              {stats.currentLevel + 1}
             </p>
           </div>
         </div>
@@ -296,7 +318,9 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
                             <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                            <span className="text-sm font-medium">{course.rating}</span>
+                            <span className="text-sm font-medium">
+                              {course.rating}
+                            </span>
                             <span className="text-sm text-gray-500">
                               ({course.studentCount})
                             </span>
@@ -339,7 +363,7 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                     >
                       <div
                         className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                        style={{ backgroundColor: achievement.color + '20' }}
+                        style={{ backgroundColor: achievement.color + "20" }}
                       >
                         {achievement.icon}
                       </div>
@@ -367,35 +391,45 @@ export function StudentDashboardView({ initialViewModel, userId }: StudentDashbo
                   href="/dashboard/student/courses"
                   className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <span className="text-gray-700 dark:text-gray-300">คอร์สของฉัน</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    คอร์สของฉัน
+                  </span>
                   <ChevronRight className="w-5 h-5 text-gray-400" />
                 </Link>
                 <Link
                   href="/dashboard/student/wishlist"
                   className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <span className="text-gray-700 dark:text-gray-300">Wishlist</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    Wishlist
+                  </span>
                   <ChevronRight className="w-5 h-5 text-gray-400" />
                 </Link>
                 <Link
                   href="/dashboard/student/certificates"
                   className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <span className="text-gray-700 dark:text-gray-300">ใบประกาศนียบัตร</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    ใบประกาศนียบัตร
+                  </span>
                   <ChevronRight className="w-5 h-5 text-gray-400" />
                 </Link>
                 <Link
                   href="/achievements"
                   className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <span className="text-gray-700 dark:text-gray-300">ความสำเร็จ</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    ความสำเร็จ
+                  </span>
                   <ChevronRight className="w-5 h-5 text-gray-400" />
                 </Link>
                 <Link
                   href="/profile"
                   className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <span className="text-gray-700 dark:text-gray-300">โปรไฟล์</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    โปรไฟล์
+                  </span>
                   <ChevronRight className="w-5 h-5 text-gray-400" />
                 </Link>
               </div>

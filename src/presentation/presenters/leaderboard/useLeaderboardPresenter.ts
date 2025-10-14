@@ -30,13 +30,13 @@ export function useLeaderboardPresenter(
 
   // Load data
   const loadData = async (newFilter?: LeaderboardFilter) => {
-    if (!user?.id) return;
+    if (!user?.userId) return;
 
     try {
       setLoading(true);
       setError(null);
       const data = await ClientLeaderboardPresenterFactory.create(
-        user.id,
+        user.userId,
         newFilter || filter
       );
       setViewModel(data);
@@ -50,10 +50,10 @@ export function useLeaderboardPresenter(
   };
 
   useEffect(() => {
-    if (!user?.id || initialViewModel) return;
+    if (!user?.userId || initialViewModel) return;
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id]);
+  }, [user?.userId]);
 
   // Change filter
   const changeFilter = async (newFilter: LeaderboardFilter) => {

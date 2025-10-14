@@ -26,7 +26,7 @@ export function useInstructorDashboardPresenter(
   }, [isAuthenticated, router]);
 
   useEffect(() => {
-    if (!user?.id || initialViewModel) return;
+    if (!user?.userId || initialViewModel) return;
 
     const loadData = async () => {
       try {
@@ -34,7 +34,7 @@ export function useInstructorDashboardPresenter(
         setError(null);
         const presenter =
           await InstructorDashboardPresenterFactory.createClient();
-        const data = await presenter.getViewModel(user.id);
+        const data = await presenter.getViewModel(user.userId);
         setViewModel(data);
       } catch (err) {
         setError(
@@ -46,17 +46,17 @@ export function useInstructorDashboardPresenter(
     };
 
     loadData();
-  }, [user?.id, initialViewModel]);
+  }, [user?.userId, initialViewModel]);
 
   const refresh = async () => {
-    if (!user?.id) return;
+    if (!user?.userId) return;
 
     try {
       setLoading(true);
       setError(null);
       const presenter =
         await InstructorDashboardPresenterFactory.createClient();
-      const data = await presenter.getViewModel(user.id);
+      const data = await presenter.getViewModel(user.userId);
       setViewModel(data);
     } catch (err) {
       setError(

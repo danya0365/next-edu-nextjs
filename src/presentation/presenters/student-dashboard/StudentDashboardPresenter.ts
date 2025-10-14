@@ -1,8 +1,8 @@
-import { courses } from '@/src/data/mock/courses.mock';
-import { enrollments } from '@/src/data/mock/enrollments.mock';
-import { students } from '@/src/data/mock/students.mock';
-import { achievements } from '@/src/data/mock/achievements.mock';
-import { instructors } from '@/src/data/mock/instructors.mock';
+import { achievements } from "@/src/data/mock/achievements.mock";
+import { courses } from "@/src/data/mock/courses.mock";
+import { enrollments } from "@/src/data/mock/enrollments.mock";
+import { instructors } from "@/src/data/mock/instructors.mock";
+import { students } from "@/src/data/mock/students.mock";
 
 export interface DashboardStats {
   enrolledCourses: number;
@@ -47,7 +47,7 @@ export interface RecentAchievement {
   color: string;
   points: number;
   unlockedAt: string;
-  rarity: 'common' | 'rare' | 'epic' | 'legendary';
+  rarity: "common" | "rare" | "epic" | "legendary";
 }
 
 export interface StudentDashboardViewModel {
@@ -58,15 +58,21 @@ export interface StudentDashboardViewModel {
 }
 
 export class StudentDashboardPresenter {
-  static async getViewModel(userId: string): Promise<StudentDashboardViewModel> {
+  static async getViewModel(
+    userId: string
+  ): Promise<StudentDashboardViewModel> {
+    console.log("StudentDashboardPresenter.getViewModel", userId);
     // Get student data
     const student = students.find((s) => s.userId === userId);
     if (!student) {
-      throw new Error('Student not found');
+      console.log("Student not found", students, userId);
+      throw new Error("Student not found");
     }
 
     // Get enrollments
-    const studentEnrollments = enrollments.filter((e) => e.studentId === student.id);
+    const studentEnrollments = enrollments.filter(
+      (e) => e.studentId === student.id
+    );
 
     // Calculate stats
     const stats: DashboardStats = {
@@ -80,22 +86,30 @@ export class StudentDashboardPresenter {
 
     // Get continue learning courses (in progress, sorted by last accessed)
     const continueLearning: ContinueLearningCourse[] = studentEnrollments
-      .filter((e) => e.status === 'active' && e.progress > 0 && e.progress < 100)
-      .sort((a, b) => new Date(b.lastAccessedAt).getTime() - new Date(a.lastAccessedAt).getTime())
+      .filter(
+        (e) => e.status === "active" && e.progress > 0 && e.progress < 100
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.lastAccessedAt).getTime() -
+          new Date(a.lastAccessedAt).getTime()
+      )
       .slice(0, 3)
       .map((enrollment) => {
         const course = courses.find((c) => c.id === enrollment.courseId);
-        const instructor = course ? instructors.find((i) => i.id === course.instructorId) : null;
+        const instructor = course
+          ? instructors.find((i) => i.id === course.instructorId)
+          : null;
 
         return {
-          id: course?.id || '',
-          slug: course?.slug || '',
-          title: course?.title || '',
-          thumbnail: course?.thumbnail || '',
-          instructorName: instructor?.displayName || '',
-          instructorAvatar: instructor?.avatar || '',
+          id: course?.id || "",
+          slug: course?.slug || "",
+          title: course?.title || "",
+          thumbnail: course?.thumbnail || "",
+          instructorName: instructor?.displayName || "",
+          instructorAvatar: instructor?.avatar || "",
           progress: enrollment.progress,
-          currentLessonTitle: 'บทเรียนถัดไป', // TODO: Get from lessons.mock
+          currentLessonTitle: "บทเรียนถัดไป", // TODO: Get from lessons.mock
           lastAccessedAt: enrollment.lastAccessedAt,
         };
       });
@@ -107,19 +121,25 @@ export class StudentDashboardPresenter {
       .map((c) => c.categoryId);
 
     const recommendedCourses: RecommendedCourse[] = courses
-      .filter((c) => !enrolledCourseIds.includes(c.id) && enrolledCategories.includes(c.categoryId))
-      .filter((c) => c.status === 'published')
+      .filter(
+        (c) =>
+          !enrolledCourseIds.includes(c.id) &&
+          enrolledCategories.includes(c.categoryId)
+      )
+      .filter((c) => c.status === "published")
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 4)
       .map((course) => {
-        const instructor = instructors.find((i) => i.id === course.instructorId);
+        const instructor = instructors.find(
+          (i) => i.id === course.instructorId
+        );
         return {
           id: course.id,
           slug: course.slug,
           title: course.title,
           thumbnail: course.thumbnail,
-          instructorName: instructor?.displayName || '',
-          instructorAvatar: instructor?.avatar || '',
+          instructorName: instructor?.displayName || "",
+          instructorAvatar: instructor?.avatar || "",
           categoryName: course.categoryId, // TODO: Get category name from master data
           rating: course.rating,
           studentCount: course.studentCount,

@@ -26,7 +26,7 @@ export function useWishlistPresenter(initialViewModel?: WishlistViewModel) {
   }, [isAuthenticated, router]);
 
   useEffect(() => {
-    if (!user || initialViewModel) return;
+    if (!user?.userId || initialViewModel) return;
 
     const loadData = async () => {
       try {

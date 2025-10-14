@@ -1,5 +1,5 @@
-import { achievements } from '@/src/data/mock/achievements.mock';
-import { students } from '@/src/data/mock/students.mock';
+import { achievements } from "@/src/data/mock/achievements.mock";
+import { students } from "@/src/data/mock/students.mock";
 
 export interface AchievementItem {
   id: string;
@@ -8,7 +8,7 @@ export interface AchievementItem {
   icon: string;
   color: string;
   points: number;
-  rarity: 'common' | 'rare' | 'epic' | 'legendary';
+  rarity: "common" | "rare" | "epic" | "legendary";
   isUnlocked: boolean;
   unlockedAt?: string;
   progress?: number; // 0-100
@@ -37,10 +37,13 @@ export interface AchievementsViewModel {
 
 export class AchievementsPresenter {
   static async getViewModel(userId: string): Promise<AchievementsViewModel> {
+    console.log("AchievementsPresenter.getViewModel", userId);
     // Get student data
     const student = students.find((s) => s.userId === userId);
+
     if (!student) {
-      throw new Error('Student not found');
+      console.log("Student not found", students, userId);
+      throw new Error("Student not found");
     }
 
     // Calculate stats
@@ -59,30 +62,40 @@ export class AchievementsPresenter {
     };
 
     // Map achievements with unlock status
-    const achievementItems: AchievementItem[] = achievements.map((achievement) => {
-      const isUnlocked = student.achievements.includes(achievement.id);
-      
-      return {
-        id: achievement.id,
-        name: achievement.name,
-        description: achievement.description,
-        icon: achievement.icon,
-        color: achievement.color,
-        points: achievement.points,
-        rarity: achievement.rarity,
-        isUnlocked,
-        unlockedAt: isUnlocked ? new Date().toISOString() : undefined, // TODO: Get from user_achievements
-        progress: isUnlocked ? 100 : this.calculateProgress(achievement.requirement, student),
-        requirement: achievement.requirement,
-      };
-    });
+    const achievementItems: AchievementItem[] = achievements.map(
+      (achievement) => {
+        const isUnlocked = student.achievements.includes(achievement.id);
+
+        return {
+          id: achievement.id,
+          name: achievement.name,
+          description: achievement.description,
+          icon: achievement.icon,
+          color: achievement.color,
+          points: achievement.points,
+          rarity: achievement.rarity,
+          isUnlocked,
+          unlockedAt: isUnlocked ? new Date().toISOString() : undefined, // TODO: Get from user_achievements
+          progress: isUnlocked
+            ? 100
+            : this.calculateProgress(achievement.requirement, student),
+          requirement: achievement.requirement,
+        };
+      }
+    );
 
     // Count achievements by rarity
     const rarityCount = {
-      common: achievementItems.filter((a) => a.rarity === 'common' && a.isUnlocked).length,
-      rare: achievementItems.filter((a) => a.rarity === 'rare' && a.isUnlocked).length,
-      epic: achievementItems.filter((a) => a.rarity === 'epic' && a.isUnlocked).length,
-      legendary: achievementItems.filter((a) => a.rarity === 'legendary' && a.isUnlocked).length,
+      common: achievementItems.filter(
+        (a) => a.rarity === "common" && a.isUnlocked
+      ).length,
+      rare: achievementItems.filter((a) => a.rarity === "rare" && a.isUnlocked)
+        .length,
+      epic: achievementItems.filter((a) => a.rarity === "epic" && a.isUnlocked)
+        .length,
+      legendary: achievementItems.filter(
+        (a) => a.rarity === "legendary" && a.isUnlocked
+      ).length,
     };
 
     return {
@@ -92,10 +105,13 @@ export class AchievementsPresenter {
     };
   }
 
-  private static calculateProgress(requirement: string, student: { completedCourses: string[] }): number {
+  private static calculateProgress(
+    requirement: string,
+    student: { completedCourses: string[] }
+  ): number {
     // Simple progress calculation based on requirement
     // TODO: Implement proper progress tracking
-    if (requirement.includes('Complete') && requirement.includes('courses')) {
+    if (requirement.includes("Complete") && requirement.includes("courses")) {
       const match = requirement.match(/\d+/);
       if (match) {
         const required = parseInt(match[0]);

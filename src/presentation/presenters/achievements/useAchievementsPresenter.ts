@@ -41,13 +41,15 @@ export function useAchievementsPresenter(
 
   // Load data
   useEffect(() => {
-    if (!user?.id || initialViewModel) return;
+    if (!user?.userId || initialViewModel) return;
 
     const loadData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await ClientAchievementsPresenterFactory.create(user.id);
+        const data = await ClientAchievementsPresenterFactory.create(
+          user.userId
+        );
         setViewModel(data);
       } catch (err) {
         setError(
@@ -59,7 +61,7 @@ export function useAchievementsPresenter(
     };
 
     loadData();
-  }, [user?.id, initialViewModel]);
+  }, [user?.userId, initialViewModel]);
 
   // Filter achievements
   const filteredAchievements =
@@ -72,12 +74,12 @@ export function useAchievementsPresenter(
 
   // Refresh data
   const refresh = async () => {
-    if (!user?.id) return;
+    if (!user?.userId) return;
 
     try {
       setLoading(true);
       setError(null);
-      const data = await ClientAchievementsPresenterFactory.create(user.id);
+      const data = await ClientAchievementsPresenterFactory.create(user.userId);
       setViewModel(data);
     } catch (err) {
       setError(

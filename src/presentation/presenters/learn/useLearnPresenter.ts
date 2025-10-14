@@ -100,7 +100,7 @@ export function useLearnPresenter(
    * Mark lesson as complete
    */
   const markComplete = useCallback(async () => {
-    if (!user?.id || !viewModel?.currentLesson) return;
+    if (!user?.userId || !viewModel?.currentLesson) return;
 
     setLoading(true);
     setError(null);
@@ -118,7 +118,7 @@ export function useLearnPresenter(
     } finally {
       setLoading(false);
     }
-  }, [viewModel, courseId, user?.id]);
+  }, [viewModel, courseId, user?.userId]);
 
   /**
    * Go to next lesson
