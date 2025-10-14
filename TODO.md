@@ -139,7 +139,7 @@ Status Colors:
 ### Priority 4 - Advanced Features (Week 9+)
 - [x] 💬 **Community** (`/community`) - ✅ เสร็จแล้ว
 - [x] 📺 **Live Classes** (`/live-classes`) - ✅ เสร็จแล้ว
-- [ ] 🎯 **Challenges** (`/challenges`) - ความท้าทาย
+- [x] 🎯 **Challenges** (`/challenges`) - ✅ เสร็จแล้ว
 
 **📋 รายละเอียดแต่ละหน้า:** ดูที่ `TODO_FEATURES.md`
 
@@ -456,8 +456,9 @@ Status Colors:
 - ✅ FAQ page (16 FAQs, 5 categories, search, expand/collapse)
 - ✅ Community page (posts, comments, create post, like, filter)
 - ✅ Live Classes page (upcoming, live, ended, filters, registration)
+- ✅ Challenges page (active, upcoming, ended, filters, progress tracking)
 
-**Platform Status: 23 pages complete! 🚀🎉✨🎊**
+**Platform Status: 24 pages complete! 🚀🎉✨🎊**
 
 **Dashboard Sub-pages: ครบทั้งหมด! ✅**
 - ✅ My Courses (`/dashboard/student/courses`) - พร้อม Master & Mock Data!
@@ -488,8 +489,8 @@ Status Colors:
 - 🔄 Video player integration (HTML5 video)
 - 🔄 Quiz system UI
 - 🔄 Supabase integration (auth, database)
-- 🔄 Live Classes (optional)
-- 🔄 Challenges (optional)
+- 🔄 Challenge detail page (optional)
+- 🔄 Live class detail page (optional)
 
 **READY FOR:** 
 ✅ User testing
