@@ -132,7 +132,8 @@ Status Colors:
 - [x] 📊 **Leaderboard** (`/leaderboard`) - ✅ เสร็จแล้ว
 - [x] 📄 **About** (`/about`) - ✅ เสร็จแล้ว
 - [x] 📄 **Contact** (`/contact`) - ✅ เสร็จแล้ว
-- [ ] 📄 **FAQ, Privacy, Terms** (`/faq`, `/privacy`, `/terms`)
+- [x] 📄 **FAQ** (`/faq`) - ✅ เสร็จแล้ว
+- [ ] 📄 **Privacy, Terms** (`/privacy`, `/terms`)
 
 ### Priority 4 - Advanced Features (Week 9+)
 - [ ] 💬 **Community** (`/community`) - ชุมชน
@@ -432,7 +433,7 @@ Status Colors:
 
 ## 🎯 Current Focus
 
-**NOW:** Sprint 3, 4 & 5 Progress - Complete Platform! 🎊
+**NOW:** Sprint 3, 4 & 5 - Platform Complete! 🎊✨
 - ✅ Landing page complete
 - ✅ Master Data complete (6 files)
 - ✅ Mock Data complete (9 files)
@@ -451,11 +452,16 @@ Status Colors:
 - ✅ Navbar with conditional links (Dashboard, Achievements, Leaderboard)
 - ✅ About page (mission, vision, values, team, stats)
 - ✅ Contact page (form, contact info, social links)
-- 🔄 **NEXT:** FAQ, Privacy, Terms pages
-- 🔄 Next: Sub-pages (My Courses, Wishlist, Certificates)
-- 🔄 Next: Instructor Dashboard
-- 🔄 Next: Authentication logic (Supabase)
-- 🔄 Next: Video player integration
-- 🔄 Next: Quiz system
+- ✅ FAQ page (16 FAQs, 5 categories, search, expand/collapse)
 
-**NEXT:** Sprint 6 - Advanced Features & Backend Integration
+**Platform Status: 13 pages complete! 🚀**
+
+**NEXT Steps:**
+- 🔄 Sub-pages (My Courses, Wishlist, Certificates, Settings)
+- 🔄 Instructor Dashboard
+- 🔄 Video player integration (HTML5 video)
+- 🔄 Quiz system
+- 🔄 Supabase integration (auth, database)
+- 🔄 Privacy & Terms pages
+
+**READY FOR:** User testing, Content creation, Production deployment
