@@ -1,26 +1,27 @@
-import { ThemeProvider } from "@/src/presentation/components/providers/ThemeProvider";
+import { Navbar } from "@/src/presentation/components/layout/Navbar";
+import { Footer } from "@/src/presentation/components/layout/Footer";
 import type { Metadata } from "next";
 import "../public/styles/index.css";
 
 export const metadata: Metadata = {
-  title: "EduX School | EduX - แอพพลิเคชันสำหรับโรงเรียน",
+  title: "Next Edu | แพลตฟอร์มเรียนออนไลน์สำหรับเด็ก",
   description:
-    "วางแผนการเดินทางที่สมบูรณ์แบบกับ Triply จองที่พัก วางแผนทริป และรับรางวัลทุกการเดินทาง พร้อมระบบ Goals, Missions และ Achievements",
+    "แพลตฟอร์มเรียนออนไลน์ที่สนุกและเหมาะสำหรับเด็กๆ เรียนรู้ผ่านเกม กิจกรรม และครูผู้สอนมืออาชีพ พัฒนาทักษะในศตวรรษที่ 21",
   keywords: [
-    "จองที่พัก",
-    "วางแผนเที่ยว",
-    "ท่องเที่ยว",
-    "โรงแรม",
-    "รีสอร์ท",
-    "Triply",
-    "travel planning",
-    "accommodation booking",
-    "trip planner",
-    "rewards",
+    "เรียนออนไลน์",
+    "คอร์สเด็ก",
+    "โปรแกรมมิ่ง",
+    "วิทยาศาสตร์",
+    "คณิตศาสตร์",
+    "Next Edu",
+    "online learning",
+    "kids education",
+    "programming for kids",
+    "STEM education",
   ],
-  authors: [{ name: "Triply Team" }],
+  authors: [{ name: "Next Edu Team" }],
   creator: "Marosdee Uma",
-  publisher: "Triply",
+  publisher: "Next Edu",
   robots: {
     index: true,
     follow: true,
@@ -54,17 +55,17 @@ export const metadata: Metadata = {
   },
   manifest: "/favicon/site.webmanifest",
   openGraph: {
-    title: "Triply | แพลตฟอร์มจองที่พักและวางแผนการเดินทาง",
+    title: "Next Edu | แพลตฟอร์มเรียนออนไลน์สำหรับเด็ก",
     description:
-      "วางแผนการเดินทางที่สมบูรณ์แบบ จองที่พัก และรับรางวัลทุกการเดินทาง",
+      "เรียนรู้อย่างสนุกสนานกับคอร์สออนไลน์มากมาย พัฒนาทักษะในศตวรรษที่ 21",
     type: "website",
-    siteName: "Triply",
+    siteName: "Next Edu",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Triply - Travel Planning & Accommodation Booking",
+        alt: "Next Edu - Online Learning Platform for Kids",
       },
     ],
     locale: "th_TH",
@@ -78,15 +79,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th" suppressHydrationWarning>
-      <body className="antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className="antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+        <Navbar />
+        <main className="min-h-screen">
           {children}
-        </ThemeProvider>
+        </main>
+        <Footer />
       </body>
     </html>
   );

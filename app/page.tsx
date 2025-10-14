@@ -15,9 +15,9 @@ export default function Home() {
   const displayCategories = categories.slice(0, 8);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 dark:from-blue-700 dark:via-purple-700 dark:to-pink-600 text-white">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
           <div className="text-center">
@@ -252,7 +252,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             🚀 พร้อมเริ่มต้นการเรียนรู้แล้วหรือยัง?
@@ -268,47 +268,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Next Edu</h3>
-              <p className="text-gray-400">
-                แพลตฟอร์มเรียนออนไลน์สำหรับเด็ก
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">หมวดหมู่</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/courses" className="hover:text-white">คอร์สทั้งหมด</Link></li>
-                <li><Link href="/courses?category=programming" className="hover:text-white">โปรแกรมมิ่ง</Link></li>
-                <li><Link href="/courses?category=science" className="hover:text-white">วิทยาศาสตร์</Link></li>
-                <li><Link href="/courses?category=mathematics" className="hover:text-white">คณิตศาสตร์</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">เกี่ยวกับ</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/about" className="hover:text-white">เกี่ยวกับเรา</Link></li>
-                <li><Link href="/contact" className="hover:text-white">ติดต่อเรา</Link></li>
-                <li><Link href="/faq" className="hover:text-white">คำถามที่พบบ่อย</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">นโยบาย</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/privacy" className="hover:text-white">นโยบายความเป็นส่วนตัว</Link></li>
-                <li><Link href="/terms" className="hover:text-white">ข้อกำหนดการใช้งาน</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-            <p>© 2025 Next Edu. All rights reserved. 🎓</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

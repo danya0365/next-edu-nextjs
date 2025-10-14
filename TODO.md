@@ -323,7 +323,9 @@ Status Colors:
 
 ### Sprint 2: Core Pages (Week 3-4)
 - [x] Browse Courses page (`/courses`) ✅
-- [ ] Course Detail page (`/courses/[id]`)
+- [x] Course Detail page (`/courses/[slug]`) ✅
+- [x] Layout (Navbar + Footer) ✅
+- [x] Dark Mode ✅
 - [ ] Learn/Player page (`/learn/[courseId]`)
 - [ ] Basic video player
 - [ ] Basic quiz system
@@ -423,11 +425,15 @@ Status Colors:
 
 ## 🎯 Current Focus
 
-**NOW:** Sprint 1 - Foundation (Week 1-2)
+**NOW:** Sprint 2 - Core Pages (Week 3-4)
 - ✅ Landing page complete
 - ✅ Master Data complete (6 files)
 - ✅ Mock Data complete (9 files)
+- ✅ Browse Courses page complete
+- ✅ Course Detail page complete
+- ✅ Layout (Navbar + Footer) complete
+- ✅ Dark Mode complete
+- 🔄 Next: Learn/Player page
 - 🔄 Next: Setup Zustand + localforage
-- 🔄 Next: Create design system components
 
 **NEXT:** Sprint 2 - Core Pages (Week 3-4)
