@@ -17,20 +17,32 @@
 - **Clean Architecture** - Presenter Pattern, SOLID Principles
 - **Type Safety** - TypeScript ทั้งหมด
 
-### 📚 Pages
+### 📚 Pages (17 หน้าสมบูรณ์)
+
+**Core Pages (4):**
 1. Landing Page - หน้าแรก
 2. Browse Courses - ค้นหาคอร์ส
 3. Course Detail - รายละเอียดคอร์ส
 4. Learn/Player - หน้าเรียน
+
+**User Pages (4):**
 5. Login/Register - ระบบสมาชิก
 6. Profile - โปรไฟล์
 7. Student Dashboard - แดชบอร์ด
-8. Achievements - ความสำเร็จ
-9. Leaderboard - กระดานคะแนน
-10. About - เกี่ยวกับเรา
-11. Contact - ติดต่อเรา
-12. FAQ - คำถามที่พบบ่อย
-13. และอื่นๆ...
+8. My Courses - คอร์สของฉัน
+9. Certificates - ใบประกาศนียบัตร
+10. Wishlist - รายการที่ชอบ
+11. Settings - ตั้งค่า
+
+**Gamification (2):**
+12. Achievements - ความสำเร็จ
+13. Leaderboard - กระดานคะแนน
+
+**Static Pages (3):**
+14. About - เกี่ยวกับเรา
+15. Contact - ติดต่อเรา
+16. FAQ - คำถามที่พบบ่อย
+17. และอื่นๆ...
 
 ## 🚀 Quick Start
 
@@ -152,7 +164,9 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 ## 📊 Status
 
-- **Frontend:** ✅ 95% Complete
+- **Frontend:** ✅ 98% Complete (17 pages)
+- **Master Data:** ✅ 6 files complete
+- **Mock Data:** ✅ 9 files complete
 - **Backend:** 🔄 Ready for integration
 - **Video Player:** 🔄 UI ready, needs implementation
 - **Quiz System:** 🔄 Data ready, needs UI

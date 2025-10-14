@@ -4,7 +4,9 @@ import { AvatarFallback } from "@/src/presentation/components/common/AvatarFallb
 import { ImageWithFallback } from "@/src/presentation/components/common/ImageWithFallback";
 import { useAuthStore } from "@/src/presentation/stores/authStore";
 import {
+  Award,
   BookOpen,
+  Heart,
   LogOut,
   Menu,
   Moon,
@@ -178,7 +180,32 @@ export function Navbar() {
                       <span>โปรไฟล์</span>
                     </Link>
                     <Link
-                      href="/settings"
+                      href="/dashboard/student/courses"
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      <span>คอร์สของฉัน</span>
+                    </Link>
+                    <Link
+                      href="/dashboard/student/certificates"
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <Award className="w-4 h-4" />
+                      <span>ใบประกาศนียบัตร</span>
+                    </Link>
+                    <Link
+                      href="/dashboard/student/wishlist"
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <Heart className="w-4 h-4" />
+                      <span>Wishlist</span>
+                    </Link>
+                    <hr className="my-2 border-gray-200 dark:border-gray-700" />
+                    <Link
+                      href="/dashboard/student/settings"
                       className="flex items-center gap-3 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                       onClick={() => setShowUserMenu(false)}
                     >
