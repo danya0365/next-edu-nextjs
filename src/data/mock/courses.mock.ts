@@ -293,7 +293,14 @@ export const getPopularCourses = () => courses.filter((c) => c.isPopular);
 export const getNewCourses = () => courses.filter((c) => c.isNew);
 
 // Helper function to get course by id
-export const getCourseById = (id: string) => courses.find((c) => c.id === id);
+export const getCourseById = (id: string): Course | undefined => {
+  return courses.find((course) => course.id === id);
+};
 
-// Helper function to get course by slug
-export const getCourseBySlug = (slug: string) => courses.find((c) => c.slug === slug);
+export const getCourseBySlug = (slug: string): Course | undefined => {
+  return courses.find((course) => course.slug === slug);
+};
+
+export const getCourseByIdOrSlug = (idOrSlug: string): Course | undefined => {
+  return courses.find((course) => course.id === idOrSlug || course.slug === idOrSlug);
+};

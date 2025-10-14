@@ -1,4 +1,4 @@
-import { getCourseById, type Course } from '@/src/data/mock/courses.mock';
+import { getCourseByIdOrSlug, type Course } from '@/src/data/mock/courses.mock';
 import { instructors, type Instructor } from '@/src/data/mock/instructors.mock';
 import { lessons, sections, type Lesson, type Section } from '@/src/data/mock/lessons.mock';
 import { quizzes } from '@/src/data/mock/quizzes.mock';
@@ -31,14 +31,15 @@ export interface LearnViewModel {
 export class LearnPresenter {
   /**
    * Get view model for the page
+   * Note: userId should be passed from auth state on client-side
    */
   async getViewModel(
     courseId: string,
     lessonId?: string,
-    userId: string = 'stud-001' // Mock user ID
+    userId?: string // Optional - if not provided, enrollment will be null
   ): Promise<LearnViewModel> {
     try {
-      const course = getCourseById(courseId);
+      const course = getCourseByIdOrSlug(courseId);
       
       if (!course) {
         return {
@@ -67,10 +68,10 @@ export class LearnPresenter {
       const courseSections = sections.filter((s) => s.courseId === course.id);
       const courseLessons = lessons.filter((l) => l.courseId === course.id);
 
-      // Get enrollment data
-      const enrollment = enrollments.find(
-        (e) => e.courseId === courseId && e.studentId === userId
-      );
+      // Get enrollment data - only if userId is provided
+      const enrollment = userId
+        ? enrollments.find((e) => e.courseId === course.id && e.studentId === userId)
+        : null;
 
       // Determine current lesson
       let currentLesson: Lesson | null = null;
@@ -138,7 +139,7 @@ export class LearnPresenter {
    */
   async generateMetadata(courseId: string, lessonId?: string) {
     try {
-      const course = getCourseById(courseId);
+      const course = getCourseByIdOrSlug(courseId);
 
       if (!course) {
         return {

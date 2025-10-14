@@ -332,9 +332,11 @@ Status Colors:
 - [ ] Quiz system implementation
 
 ### Sprint 3: User Features (Week 5-6)
+- [x] Login page ✅
+- [x] Register page ✅
+- [ ] Authentication logic (Supabase Auth)
 - [ ] Student Dashboard
 - [ ] Instructor Dashboard
-- [ ] Authentication pages
 - [ ] Profile management
 
 ### Sprint 4: Gamification (Week 7-8)
@@ -426,7 +428,7 @@ Status Colors:
 
 ## 🎯 Current Focus
 
-**NOW:** Sprint 2 - Core Pages (Week 3-4) - COMPLETE!
+**NOW:** Sprint 2 & 3 Progress
 - ✅ Landing page complete
 - ✅ Master Data complete (6 files)
 - ✅ Mock Data complete (9 files)
@@ -435,8 +437,10 @@ Status Colors:
 - ✅ Layout (Navbar + Footer) complete
 - ✅ Dark Mode complete
 - ✅ Learn/Player page complete
+- ✅ Login & Register pages complete
+- ✅ Course enrollment flow (mock)
+- 🔄 Next: Authentication logic (Supabase)
 - 🔄 Next: Video player integration
 - 🔄 Next: Quiz system
-- 🔄 Next: Setup Zustand + localforage
 
 **NEXT:** Sprint 2 - Core Pages (Week 3-4)

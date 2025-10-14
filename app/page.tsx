@@ -50,37 +50,37 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-white border-b">
+      <section className="py-12 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">2,000+</div>
-              <div className="text-gray-600">นักเรียน</div>
+              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">2,000+</div>
+              <div className="text-gray-600 dark:text-gray-300">นักเรียน</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">50+</div>
-              <div className="text-gray-600">คอร์สเรียน</div>
+              <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">50+</div>
+              <div className="text-gray-600 dark:text-gray-300">คอร์สเรียน</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-pink-600 mb-2">10+</div>
-              <div className="text-gray-600">ครูผู้สอน</div>
+              <div className="text-4xl font-bold text-pink-600 dark:text-pink-400 mb-2">10+</div>
+              <div className="text-gray-600 dark:text-gray-300">ครูผู้สอน</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-yellow-600 mb-2">4.8/5</div>
-              <div className="text-gray-600">ความพึงพอใจ</div>
+              <div className="text-4xl font-bold text-yellow-600 dark:text-yellow-400 mb-2">4.8/5</div>
+              <div className="text-gray-600 dark:text-gray-300">ความพึงพอใจ</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Courses Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               ⭐ คอร์สแนะนำ
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               คอร์สยอดนิยมที่เด็กๆ ชื่นชอบ
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function Home() {
                 <Link
                   key={course.id}
                   href={`/courses/${course.slug}`}
-                  className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
+                  className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
                 >
                   <div className="relative h-48 bg-gradient-to-br from-blue-400 to-purple-500 overflow-hidden">
                     <Image
@@ -111,19 +111,19 @@ export default function Home() {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+                      <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full font-medium">
                         {category?.name}
                       </span>
                       {course.isNew && (
-                        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
+                        <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full font-medium">
                           🆕 ใหม่
                         </span>
                       )}
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {course.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                       {course.subtitle}
                     </p>
                     <div className="flex items-center gap-2 mb-4">
@@ -134,26 +134,26 @@ export default function Home() {
                         height={32}
                         className="rounded-full"
                       />
-                      <span className="text-sm text-gray-600">{instructor?.displayName}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">{instructor?.displayName}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <span className="text-yellow-500">⭐</span>
                         <span className="font-semibold">{course.rating}</span>
-                        <span className="text-gray-500 text-sm">({course.reviewCount})</span>
+                        <span className="text-gray-500 dark:text-gray-400 text-sm">({course.reviewCount})</span>
                       </div>
                       <div className="text-right">
                         {course.discount ? (
                           <>
-                            <div className="text-gray-400 line-through text-sm">
+                            <div className="text-gray-400 dark:text-gray-500 line-through text-sm">
                               ฿{course.price}
                             </div>
-                            <div className="text-2xl font-bold text-pink-600">
+                            <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">
                               ฿{Math.round(course.price * (1 - course.discount.percentage / 100))}
                             </div>
                           </>
                         ) : (
-                          <div className="text-2xl font-bold text-blue-600">฿{course.price}</div>
+                          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">฿{course.price}</div>
                         )}
                       </div>
                     </div>
@@ -175,13 +175,13 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-gradient-to-b from-blue-50 to-purple-50">
+      <section className="py-16 bg-gradient-to-b from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               📚 หมวดหมู่คอร์ส
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               เลือกสิ่งที่คุณสนใจ
             </p>
           </div>
@@ -191,7 +191,7 @@ export default function Home() {
               <Link
                 key={category.id}
                 href={`/courses?category=${category.slug}`}
-                className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 text-center transform hover:-translate-y-2"
+                className="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 text-center transform hover:-translate-y-2"
                 style={{ borderTop: `4px solid ${category.color}` }}
               >
                 <div
@@ -200,10 +200,10 @@ export default function Home() {
                 >
                   <span style={{ color: category.color }}>📖</span>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {category.name}
                 </h3>
-                <p className="text-sm text-gray-600 line-clamp-2">{category.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{category.description}</p>
               </Link>
             ))}
           </div>
@@ -211,10 +211,10 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               🎯 เริ่มต้นง่ายๆ แค่ 3 ขั้นตอน
             </h2>
           </div>
@@ -224,8 +224,8 @@ export default function Home() {
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
                 1️⃣
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">เลือกคอร์ส</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">เลือกคอร์ส</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 ค้นหาคอร์สที่คุณสนใจจากหมวดหมู่มากมาย
               </p>
             </div>
@@ -233,8 +233,8 @@ export default function Home() {
               <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
                 2️⃣
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">เริ่มเรียน</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">เริ่มเรียน</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 เรียนผ่านวิดีโอ เกม และกิจกรรมสนุกสนาน
               </p>
             </div>
@@ -242,8 +242,8 @@ export default function Home() {
               <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
                 3️⃣
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">รับใบประกาศนียบัตร</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">รับใบประกาศนียบัตร</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 เรียนจบและรับใบประกาศนียบัตรภาคภูมิใจ
               </p>
             </div>

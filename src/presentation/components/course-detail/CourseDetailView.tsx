@@ -209,9 +209,12 @@ export function CourseDetailView({ initialViewModel }: CourseDetailViewProps) {
 
                   {/* CTA Buttons */}
                   <div className="space-y-3">
-                    <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:scale-[1.02] transition-all">
+                    <Link
+                      href={`/learn/${course.slug}`}
+                      className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:scale-[1.02] transition-all text-center"
+                    >
                       ลงทะเบียนเรียนเลย!
-                    </button>
+                    </Link>
                     <button className="w-full border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                       เพิ่มลงตะกร้า
                     </button>

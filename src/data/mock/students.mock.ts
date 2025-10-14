@@ -2,6 +2,7 @@ export interface Student {
   id: string;
   userId: string;
   displayName: string;
+  email: string;
   avatar: string;
   age: number;
   grade?: string;
@@ -26,6 +27,7 @@ export const students: Student[] = [
     id: 'stud-001',
     userId: 'user-stud-001',
     displayName: 'น้องมายด์',
+    email: 'mind@example.com',
     avatar: 'https://api.dicebear.com/7.x/big-smile/svg?seed=Mind',
     age: 10,
     grade: 'ป.4',
@@ -48,6 +50,7 @@ export const students: Student[] = [
     id: 'stud-002',
     userId: 'user-stud-002',
     displayName: 'น้องปุ๊ก',
+    email: 'pook@example.com',
     avatar: 'https://api.dicebear.com/7.x/big-smile/svg?seed=Pook',
     age: 8,
     grade: 'ป.2',
@@ -70,6 +73,7 @@ export const students: Student[] = [
     id: 'stud-003',
     userId: 'user-stud-003',
     displayName: 'น้องเอ',
+    email: 'ae@example.com',
     avatar: 'https://api.dicebear.com/7.x/big-smile/svg?seed=Ae',
     age: 12,
     grade: 'ม.1',

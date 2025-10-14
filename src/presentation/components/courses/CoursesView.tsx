@@ -4,7 +4,8 @@ import { CoursesViewModel } from '@/src/presentation/presenters/courses/CoursesP
 import { useCoursesPresenter } from '@/src/presentation/presenters/courses/useCoursesPresenter';
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { ImageWithFallback } from '@/src/presentation/components/common/ImageWithFallback';
+import { AvatarFallback } from '@/src/presentation/components/common/AvatarFallback';
 
 interface CoursesViewProps {
   initialViewModel?: CoursesViewModel;
@@ -53,12 +54,12 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
   // Show loading only on initial load
   if (loading && !viewModel) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">กำลังโหลดคอร์ส...</p>
+              <p className="text-gray-600 dark:text-gray-300">กำลังโหลดคอร์ส...</p>
             </div>
           </div>
         </div>
@@ -69,13 +70,13 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
   // Show error state
   if (error && !viewModel) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
               <div className="text-red-500 text-6xl mb-4">⚠️</div>
-              <p className="text-red-600 font-medium mb-2">เกิดข้อผิดพลาด</p>
-              <p className="text-gray-600 mb-4">{error}</p>
+              <p className="text-red-600 dark:text-red-400 font-medium mb-2">เกิดข้อผิดพลาด</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
             </div>
           </div>
         </div>
@@ -94,7 +95,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
     (filters.minRating ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Header */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,32 +107,32 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
       </section>
 
       {/* Stats Bar */}
-      <section className="bg-white border-b py-6">
+      <section className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                 {viewModel.stats.totalCourses}
               </div>
-              <div className="text-sm text-gray-600">คอร์ส</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">คอร์ส</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">
+              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                 {viewModel.stats.totalInstructors}
               </div>
-              <div className="text-sm text-gray-600">ครูผู้สอน</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">ครูผู้สอน</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600">
+              <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">
                 {viewModel.stats.totalStudents.toLocaleString()}
               </div>
-              <div className="text-sm text-gray-600">นักเรียน</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">นักเรียน</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-600">
+              <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                 ⭐ {viewModel.stats.averageRating}
               </div>
-              <div className="text-sm text-gray-600">คะแนนเฉลี่ย</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">คะแนนเฉลี่ย</div>
             </div>
           </div>
         </div>
@@ -142,13 +143,13 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
           <aside className="lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-2xl shadow-md p-6 sticky top-4">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 sticky top-4">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-gray-900">🔍 ตัวกรอง</h2>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">🔍 ตัวกรอง</h2>
                 {activeFiltersCount > 0 && (
                   <button
                     onClick={clearFilters}
-                    className="text-sm text-blue-600 hover:text-blue-700"
+                    className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                   >
                     ล้าง ({activeFiltersCount})
                   </button>
@@ -157,7 +158,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
 
               {/* Categories */}
               <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">หมวดหมู่</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">หมวดหมู่</h3>
                 <div className="space-y-2">
                   {viewModel.categories.slice(0, 8).map((category) => (
                     <button
@@ -165,8 +166,8 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                       onClick={() => handleCategoryFilter(category.id)}
                       className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                         filters.categoryId === category.id
-                          ? 'bg-blue-100 text-blue-900 font-semibold'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-200 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                       }`}
                     >
                       {category.name}
@@ -177,7 +178,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
 
               {/* Levels */}
               <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">ระดับความยาก</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">ระดับความยาก</h3>
                 <div className="space-y-2">
                   {viewModel.levels.map((level) => (
                     <button
@@ -185,8 +186,8 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                       onClick={() => handleLevelFilter(level.id)}
                       className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                         filters.levelId === level.id
-                          ? 'bg-blue-100 text-blue-900 font-semibold'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-200 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                       }`}
                     >
                       {level.name}
@@ -197,7 +198,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
 
               {/* Rating Filter */}
               <div>
-                <h3 className="font-semibold text-gray-900 mb-3">คะแนนขั้นต่ำ</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">คะแนนขั้นต่ำ</h3>
                 <div className="space-y-2">
                   {[4.5, 4.0, 3.5].map((rating) => (
                     <button
@@ -210,8 +211,8 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                       }
                       className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                         filters.minRating === rating
-                          ? 'bg-blue-100 text-blue-900 font-semibold'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-200 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                       }`}
                     >
                       ⭐ {rating} ขึ้นไป
@@ -225,7 +226,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
           {/* Main Content */}
           <main className="flex-1">
             {/* Search and Sort Bar */}
-            <div className="bg-white rounded-2xl shadow-md p-4 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-4 mb-6">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1">
                   <input
@@ -233,13 +234,13 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                     placeholder="🔍 ค้นหาคอร์ส..."
                     value={searchTerm}
                     onChange={(e) => handleSearch(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <select
                   value={filters.sortBy || 'popular'}
                   onChange={(e) => handleSort(e.target.value as 'newest' | 'popular' | 'rating' | 'price-low' | 'price-high' | 'title')}
-                  className="px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
                   <option value="popular">🔥 ยอดนิยม</option>
                   <option value="newest">🆕 ใหม่ล่าสุด</option>
@@ -254,7 +255,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
             {/* Results Count */}
             <div className="mb-4">
               <p className="text-gray-600">
-                พบ <span className="font-semibold text-gray-900">{viewModel.totalCount}</span>{' '}
+                พบ <span className="font-semibold text-gray-900 dark:text-white">{viewModel.totalCount}</span>{' '}
                 คอร์ส
               </p>
             </div>
@@ -271,10 +272,10 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                     <Link
                       key={course.id}
                       href={`/courses/${course.slug}`}
-                      className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
+                      className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
                     >
                       <div className="relative h-48 bg-gradient-to-br from-blue-400 to-purple-500 overflow-hidden">
-                        <Image
+                        <ImageWithFallback
                           src={course.thumbnail}
                           alt={course.title}
                           fill
@@ -293,28 +294,36 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                       </div>
                       <div className="p-6">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+                          <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full font-medium">
                             {course.category.name}
                           </span>
-                          <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium">
+                          <span className="text-xs bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded-full font-medium">
                             {course.level.name}
                           </span>
                         </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
                           {course.title}
                         </h3>
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                           {course.subtitle}
                         </p>
                         <div className="flex items-center gap-2 mb-4">
-                          <Image
+                          <ImageWithFallback
                             src={course.instructor.avatar}
                             alt={course.instructor.displayName}
                             width={24}
                             height={24}
                             className="rounded-full"
+                            fallbackElement={
+                              <AvatarFallback 
+                                name={course.instructor.displayName} 
+                                size={24} 
+                                fontSize="text-[10px]"
+                                gradient="purple-pink"
+                              />
+                            }
                           />
-                          <span className="text-xs text-gray-600">
+                          <span className="text-xs text-gray-600 dark:text-gray-300">
                             {course.instructor.displayName}
                           </span>
                         </div>
@@ -322,22 +331,22 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                           <div className="flex items-center gap-1">
                             <span className="text-yellow-500">⭐</span>
                             <span className="font-semibold text-sm">{course.rating}</span>
-                            <span className="text-gray-500 text-xs">
+                            <span className="text-gray-500 dark:text-gray-400 text-xs">
                               ({course.reviewCount})
                             </span>
                           </div>
                           <div className="text-right">
                             {course.discount ? (
                               <>
-                                <div className="text-gray-400 line-through text-xs">
+                                <div className="text-gray-400 dark:text-gray-500 line-through text-xs">
                                   ฿{course.price}
                                 </div>
-                                <div className="text-xl font-bold text-pink-600">
+                                <div className="text-xl font-bold text-pink-600 dark:text-pink-400">
                                   ฿{finalPrice}
                                 </div>
                               </>
                             ) : (
-                              <div className="text-xl font-bold text-blue-600">
+                              <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
                                 ฿{course.price}
                               </div>
                             )}
@@ -349,12 +358,12 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                 })}
               </div>
             ) : (
-              <div className="text-center py-16 bg-white rounded-2xl shadow-md">
+              <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-2xl shadow-md">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   ไม่พบคอร์สที่คุณค้นหา
                 </h3>
-                <p className="text-gray-600 mb-6">ลองเปลี่ยนคำค้นหาหรือตัวกรองอื่น</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">ลองเปลี่ยนคำค้นหาหรือตัวกรองอื่น</p>
                 <button
                   onClick={clearFilters}
                   className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
@@ -370,7 +379,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                   ← ก่อนหน้า
                 </button>
@@ -395,7 +404,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                         className={`w-10 h-10 rounded-lg transition-colors ${
                           currentPage === pageNum
                             ? 'bg-blue-600 text-white font-semibold'
-                            : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                            : 'border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                         }`}
                       >
                         {pageNum}
@@ -407,7 +416,7 @@ export function CoursesView({ initialViewModel }: CoursesViewProps) {
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                   ถัดไป →
                 </button>

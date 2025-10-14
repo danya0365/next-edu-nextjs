@@ -42,7 +42,7 @@ export default async function LearnPage({ params, searchParams }: LearnPageProps
   const presenter = await LearnPresenterFactory.create();
 
   try {
-    // Get view model from presenter
+    // Get view model from presenter without userId (will be checked on client-side)
     const viewModel = await presenter.getViewModel(
       resolvedParams.courseId,
       resolvedSearchParams.lesson
@@ -55,7 +55,7 @@ export default async function LearnPage({ params, searchParams }: LearnPageProps
           <div className="text-center p-8">
             <div className="text-6xl mb-4">😕</div>
             <h1 className="text-2xl font-bold text-white mb-2">ไม่พบคอร์ส</h1>
-            <p className="text-gray-400 mb-6">คอร์สนี้อาจถูกลบหรือคุณยังไม่ได้ลงทะเบียนเรียน</p>
+            <p className="text-gray-400 mb-6">คอร์สนี้อาจถูกลบหรือไม่มีอยู่ในระบบ</p>
             <Link
               href="/courses"
               className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
@@ -67,25 +67,7 @@ export default async function LearnPage({ params, searchParams }: LearnPageProps
       );
     }
 
-    // Check if user has enrolled
-    if (!viewModel.course.enrollment) {
-      return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center">
-          <div className="text-center p-8">
-            <div className="text-6xl mb-4">🔒</div>
-            <h1 className="text-2xl font-bold text-white mb-2">คุณยังไม่ได้ลงทะเบียนคอร์สนี้</h1>
-            <p className="text-gray-400 mb-6">กรุณาลงทะเบียนเรียนก่อนเข้าถึงเนื้อหา</p>
-            <Link
-              href={`/courses/${viewModel.course.slug}`}
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
-            >
-              ลงทะเบียนเรียน
-            </Link>
-          </div>
-        </div>
-      );
-    }
-
+    // Note: Enrollment check is done on client-side in LearnView
     return (
       <LearnView
         initialViewModel={viewModel}

@@ -2,8 +2,10 @@
 
 import { LearnViewModel } from '@/src/presentation/presenters/learn/LearnPresenter';
 import { useLearnPresenter } from '@/src/presentation/presenters/learn/useLearnPresenter';
+import { useAuthStore } from '@/src/presentation/stores/authStore';
+import { enrollments } from '@/src/data/mock/enrollments.mock';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Play,
   Pause,
@@ -28,6 +30,7 @@ interface LearnViewProps {
 }
 
 export function LearnView({ initialViewModel, courseId, lessonId }: LearnViewProps) {
+  const { user, isAuthenticated } = useAuthStore();
   const {
     viewModel,
     loading,
@@ -41,6 +44,56 @@ export function LearnView({ initialViewModel, courseId, lessonId }: LearnViewPro
 
   const [activeTab, setActiveTab] = useState<'overview' | 'notes' | 'qa'>('overview');
   const [showCurriculum, setShowCurriculum] = useState(true);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [checkingEnrollment, setCheckingEnrollment] = useState(true);
+
+  // Check enrollment status
+  useEffect(() => {
+    if (!isAuthenticated || !user || !viewModel?.course) {
+      setIsEnrolled(false);
+      setCheckingEnrollment(false);
+      return;
+    }
+
+    // Check if user is enrolled in this course
+    const enrollment = enrollments.find(
+      (e) => e.courseId === viewModel.course!.id && e.studentId === user.userId
+    );
+    
+    setIsEnrolled(!!enrollment);
+    setCheckingEnrollment(false);
+  }, [isAuthenticated, user, viewModel?.course]);
+
+  // Show enrollment check UI
+  if (checkingEnrollment) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-400">กำลังตรวจสอบสิทธิ์...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show enrollment required UI
+  if (!isEnrolled && viewModel?.course) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center">
+        <div className="text-center p-8">
+          <div className="text-6xl mb-4">🔒</div>
+          <h1 className="text-2xl font-bold text-white mb-2">คุณยังไม่ได้ลงทะเบียนคอร์สนี้</h1>
+          <p className="text-gray-400 mb-6">กรุณาลงทะเบียนเรียนก่อนเข้าถึงเนื้อหา</p>
+          <Link
+            href={`/courses/${viewModel.course.slug}`}
+            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
+          >
+            ลงทะเบียนเรียน
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (loading && !viewModel) {
     return (
