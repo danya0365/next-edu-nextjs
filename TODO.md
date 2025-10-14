@@ -116,14 +116,16 @@ Status Colors:
 
 ### Priority 1 - Core Pages (Week 1-4)
 - [x] 🏠 **Landing Page** (`/`) - ✅ เสร็จแล้ว
-- [ ] 🔍 **Browse Courses** (`/courses`) - หน้าค้นหาคอร์ส
-- [ ] 📚 **Course Detail** (`/courses/[id]`) - รายละเอียดคอร์ส
-- [ ] 🎓 **Learn/Player** (`/learn/[courseId]`) - หน้าเรียน
+- [x] 🔍 **Browse Courses** (`/courses`) - ✅ เสร็จแล้ว
+- [x] 📚 **Course Detail** (`/courses/[slug]`) - ✅ เสร็จแล้ว
+- [x] 🎓 **Learn/Player** (`/learn/[courseId]`) - ✅ เสร็จแล้ว
 
 ### Priority 2 - User Pages (Week 5-6)
-- [ ] 👤 **Student Dashboard** (`/dashboard/student`) - แดชบอร์ดนักเรียน
+- [x] 👤 **Student Dashboard** (`/dashboard/student`) - ✅ เสร็จแล้ว
 - [ ] 👨‍🏫 **Instructor Dashboard** (`/dashboard/instructor`) - แดชบอร์ดครู
-- [ ] 🔐 **Authentication** (`/login`, `/register`, `/forgot-password`)
+- [x] 🔐 **Authentication** (`/login`, `/register`) - ✅ เสร็จแล้ว
+- [ ] 🔐 **Forgot Password** (`/forgot-password`)
+- [x] 👤 **Profile** (`/profile`) - ✅ เสร็จแล้ว
 
 ### Priority 3 - Additional Pages (Week 7-8)
 - [ ] 🏆 **Achievements** (`/achievements`) - ความสำเร็จ
@@ -428,7 +430,7 @@ Status Colors:
 
 ## 🎯 Current Focus
 
-**NOW:** Sprint 2 & 3 Progress
+**NOW:** Sprint 3 Progress - User Features & Gamification
 - ✅ Landing page complete
 - ✅ Master Data complete (6 files)
 - ✅ Mock Data complete (9 files)
@@ -436,11 +438,17 @@ Status Colors:
 - ✅ Course Detail page complete
 - ✅ Layout (Navbar + Footer) complete
 - ✅ Dark Mode complete
-- ✅ Learn/Player page complete
+- ✅ Learn/Player page complete with enrollment check
 - ✅ Login & Register pages complete
+- ✅ Profile page complete
+- ✅ ImageWithFallback + AvatarFallback components
 - ✅ Course enrollment flow (mock)
+- ✅ Student Dashboard page (stats, continue learning, recommended courses, achievements)
+- 🔄 **NOW:** Achievements page
+- 🔄 Next: Leaderboard page
+- 🔄 Next: Instructor Dashboard
 - 🔄 Next: Authentication logic (Supabase)
 - 🔄 Next: Video player integration
 - 🔄 Next: Quiz system
 
-**NEXT:** Sprint 2 - Core Pages (Week 3-4)
+**NEXT:** Sprint 4 - Gamification & Advanced Features
