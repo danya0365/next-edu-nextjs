@@ -454,10 +454,17 @@ Status Colors:
 - ✅ Contact page (form, contact info, social links)
 - ✅ FAQ page (16 FAQs, 5 categories, search, expand/collapse)
 
-**Platform Status: 13 pages complete! 🚀**
+**Platform Status: 15 pages complete! 🚀**
+
+**Dashboard Sub-pages:**
+- ✅ My Courses (`/dashboard/student/courses`) - เสร็จแล้ว!
+- ✅ Certificates (`/dashboard/student/certificates`) - เสร็จแล้ว!
+- 🔄 Wishlist (กำลังสร้าง)
+- 🔄 Settings
 
 **NEXT Steps:**
-- 🔄 Sub-pages (My Courses, Wishlist, Certificates, Settings)
+- 🔄 Wishlist page
+- 🔄 Settings page
 - 🔄 Instructor Dashboard
 - 🔄 Video player integration (HTML5 video)
 - 🔄 Quiz system
