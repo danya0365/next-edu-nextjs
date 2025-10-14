@@ -77,6 +77,13 @@ export function Navbar() {
   const navLinks = [
     { href: "/", label: "หน้าแรก" },
     { href: "/courses", label: "คอร์สทั้งหมด" },
+    ...(isAuthenticated && user
+      ? [
+          { href: "/dashboard/student", label: "แดชบอร์ด" },
+          { href: "/achievements", label: "ความสำเร็จ" },
+          { href: "/leaderboard", label: "อันดับ" },
+        ]
+      : []),
     { href: "/about", label: "เกี่ยวกับเรา" },
     { href: "/contact", label: "ติดต่อเรา" },
   ];

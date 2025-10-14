@@ -128,8 +128,8 @@ Status Colors:
 - [x] 👤 **Profile** (`/profile`) - ✅ เสร็จแล้ว
 
 ### Priority 3 - Additional Pages (Week 7-8)
-- [ ] 🏆 **Achievements** (`/achievements`) - ความสำเร็จ
-- [ ] 📊 **Leaderboard** (`/leaderboard`) - กระดานคะแนน
+- [x] 🏆 **Achievements** (`/achievements`) - ✅ เสร็จแล้ว
+- [x] 📊 **Leaderboard** (`/leaderboard`) - ✅ เสร็จแล้ว
 - [ ] 📄 **Static Pages** (`/about`, `/contact`, `/faq`, `/privacy`, `/terms`)
 
 ### Priority 4 - Advanced Features (Week 9+)
@@ -430,13 +430,13 @@ Status Colors:
 
 ## 🎯 Current Focus
 
-**NOW:** Sprint 3 Progress - User Features & Gamification
+**NOW:** Sprint 3 & 4 Complete! - User Features & Gamification ✨
 - ✅ Landing page complete
 - ✅ Master Data complete (6 files)
 - ✅ Mock Data complete (9 files)
 - ✅ Browse Courses page complete
 - ✅ Course Detail page complete
-- ✅ Layout (Navbar + Footer) complete
+- ✅ Layout (Navbar + Footer) complete with dynamic navigation
 - ✅ Dark Mode complete
 - ✅ Learn/Player page complete with enrollment check
 - ✅ Login & Register pages complete
@@ -444,11 +444,14 @@ Status Colors:
 - ✅ ImageWithFallback + AvatarFallback components
 - ✅ Course enrollment flow (mock)
 - ✅ Student Dashboard page (stats, continue learning, recommended courses, achievements)
-- 🔄 **NOW:** Achievements page
-- 🔄 Next: Leaderboard page
+- ✅ Achievements page (filters, rarity, stats, progress, modal)
+- ✅ Leaderboard page (top 3 podium, rankings, filters)
+- ✅ Navbar with conditional links (Dashboard, Achievements, Leaderboard)
+- 🔄 **NEXT:** Static pages (About, Contact, FAQ)
 - 🔄 Next: Instructor Dashboard
+- 🔄 Next: Sub-pages (My Courses, Wishlist, Certificates)
 - 🔄 Next: Authentication logic (Supabase)
 - 🔄 Next: Video player integration
 - 🔄 Next: Quiz system
 
-**NEXT:** Sprint 4 - Gamification & Advanced Features
+**NEXT:** Sprint 5 - Content Pages & Polish
