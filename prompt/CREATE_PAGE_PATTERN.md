@@ -356,7 +356,7 @@ import type { [PageItem] } from "./[PageName]Presenter";
 import type { Create[PageItem]Data } from "./[PageName]Presenter";
 import type { Update[PageItem]Data } from "./[PageName]Presenter";
 
-const presenter = await [PageName]PresenterFactory.createClient();
+const presenter = [PageName]PresenterFactory.createClient();
 
 export interface [PageName]PresenterHook {
   // State
