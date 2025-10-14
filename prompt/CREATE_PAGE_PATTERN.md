@@ -39,7 +39,7 @@ export async function generateMetadata({
   params,
 }: [PageName]PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const presenter = await [PageName]PresenterFactory.create();
+  const presenter = await [PageName]PresenterFactory.createServer();
 
   try {
     return presenter.generateMetadata(resolvedParams.[paramName]);
@@ -60,7 +60,7 @@ export async function generateMetadata({
  */
 export default async function [PageName]Page({ params }: [PageName]PageProps) {
   const resolvedParams = await params;
-  const presenter = await [PageName]PresenterFactory.create();
+  const presenter = await [PageName]PresenterFactory.createServer();
 
   try {
     // Get view model from presenter
