@@ -33,7 +33,7 @@ export const MOCK_LIVE_CLASSES: LiveClass[] = [
     description:
       "เรียนรู้พื้นฐาน Python ผ่านเกมและกิจกรรมสนุกๆ เหมาะสำหรับผู้เริ่มต้น",
     category: "programming",
-    instructorId: "instructor-001",
+    instructorId: "inst-001",
     instructorName: "ครูแนน",
     instructorAvatar: "/images/instructors/naen.jpg",
     thumbnail: "/images/live-classes/python-basics.jpg",
@@ -160,7 +160,7 @@ export const MOCK_LIVE_CLASSES: LiveClass[] = [
     description:
       "เรียนรู้การสร้างเกมง่ายๆ ด้วย Scratch แบบสดๆ พร้อมทำตาม",
     category: "programming",
-    instructorId: "instructor-001",
+    instructorId: "inst-001",
     instructorName: "ครูแนน",
     instructorAvatar: "/images/instructors/naen.jpg",
     thumbnail: "/images/live-classes/scratch-game.jpg",

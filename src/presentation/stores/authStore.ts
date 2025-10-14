@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import localforage from 'localforage';
 import { students } from '@/src/data/mock/students.mock';
+import { instructors } from '@/src/data/mock/instructors.mock';
 
 // Mock user data from students.mock
 export interface User {
@@ -16,6 +17,7 @@ export interface User {
   completedCourses: string[];
   points: number;
   level: number;
+  role: 'student' | 'instructor' | 'admin';
 }
 
 interface AuthState {
@@ -43,13 +45,35 @@ const MOCK_PASSWORDS: Record<string, string> = {
   'mind@example.com': 'password123',
   'pook@example.com': 'password123',
   'ae@example.com': 'password123',
+  // Instructor accounts
+  'instructor@example.com': 'instructor123',
+  'teacher@example.com': 'teacher123',
 };
 
-// Convert students.mock to User format with passwords
-const MOCK_USERS: Array<User & { password: string }> = students.map((student) => ({
-  ...student,
-  password: MOCK_PASSWORDS[student.email] || 'password123',
-}));
+// Convert students.mock and instructors.mock to User format with passwords
+const MOCK_USERS: Array<User & { password: string }> = [
+  // Students
+  ...students.map((student) => ({
+    ...student,
+    role: 'student' as const,
+    password: MOCK_PASSWORDS[student.email] || 'password123',
+  })),
+  // Instructors (from instructors.mock.ts)
+  ...instructors.map((instructor) => ({
+    id: instructor.id,
+    userId: instructor.userId,
+    displayName: instructor.displayName,
+    avatar: instructor.avatar,
+    email: instructor.id === 'inst-001' ? 'instructor@example.com' : instructor.id === 'inst-002' ? 'teacher@example.com' : `${instructor.id}@example.com`,
+    age: 35, // Default age for instructors
+    enrolledCourses: [],
+    completedCourses: [],
+    points: 0,
+    level: 1,
+    role: 'instructor' as const,
+    password: MOCK_PASSWORDS[instructor.id === 'inst-001' ? 'instructor@example.com' : instructor.id === 'inst-002' ? 'teacher@example.com' : `${instructor.id}@example.com`] || 'instructor123',
+  })),
+];
 
 // Create custom storage using localforage
 const storage = {
@@ -142,6 +166,7 @@ export const useAuthStore = create<AuthState>()(
             completedCourses: [],
             points: 0,
             level: 1,
+            role: 'student',
           };
 
           // Add to mock database (in real app, this would be API call)

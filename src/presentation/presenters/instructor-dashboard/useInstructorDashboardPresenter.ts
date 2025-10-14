@@ -21,7 +21,7 @@ export function useInstructorDashboardPresenter(
   // Check authentication
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push("/login");
+      //router.push("/login");
     }
   }, [isAuthenticated, router]);
 

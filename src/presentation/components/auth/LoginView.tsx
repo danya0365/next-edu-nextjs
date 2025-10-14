@@ -135,15 +135,35 @@ export function LoginView({ initialViewModel }: LoginViewProps) {
               </Link>
             </div>
 
-            {/* Demo Notice */}
+            {/* Demo Accounts */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-              <p className="text-sm text-blue-800 dark:text-blue-300">
-                💡 <strong>Demo Account:</strong>
-                <br />
-                Email: <code className="bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded">mind@example.com</code>
-                <br />
-                Password: <code className="bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded">password123</code>
+              <p className="text-sm font-semibold text-blue-900 dark:text-blue-200 mb-3">
+                💡 Demo Accounts:
               </p>
+              
+              {/* Student Account */}
+              <div className="mb-3 pb-3 border-b border-blue-200 dark:border-blue-700">
+                <p className="text-xs font-semibold text-blue-800 dark:text-blue-300 mb-1">
+                  👨‍🎓 Student Account:
+                </p>
+                <p className="text-xs text-blue-700 dark:text-blue-300">
+                  Email: <code className="bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded">mind@example.com</code>
+                  <br />
+                  Password: <code className="bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded">password123</code>
+                </p>
+              </div>
+
+              {/* Instructor Account */}
+              <div>
+                <p className="text-xs font-semibold text-blue-800 dark:text-blue-300 mb-1">
+                  👨‍🏫 Instructor Account:
+                </p>
+                <p className="text-xs text-blue-700 dark:text-blue-300">
+                  Email: <code className="bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded">instructor@example.com</code>
+                  <br />
+                  Password: <code className="bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded">instructor123</code>
+                </p>
+              </div>
             </div>
 
             {/* Submit Button */}

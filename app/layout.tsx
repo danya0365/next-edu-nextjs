@@ -1,5 +1,6 @@
-import { Navbar } from "@/src/presentation/components/layout/Navbar";
 import { Footer } from "@/src/presentation/components/layout/Footer";
+import { Navbar } from "@/src/presentation/components/layout/Navbar";
+import { ThemeProvider } from "@/src/presentation/components/providers/ThemeProvider";
 import type { Metadata } from "next";
 import "../public/styles/index.css";
 
@@ -79,12 +80,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th" suppressHydrationWarning>
-      <body className="antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
-        <Navbar />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

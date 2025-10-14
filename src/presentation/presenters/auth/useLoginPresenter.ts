@@ -56,8 +56,18 @@ export function useLoginPresenter(
     const success = await login(email, password);
 
     if (success) {
-      // Redirect to home or dashboard
-      router.push('/');
+      // Get user from store to check role
+      const { user } = useAuthStore.getState();
+      
+      // Redirect based on role
+      if (user?.role === 'instructor') {
+        router.push('/dashboard/instructor');
+      } else if (user?.role === 'admin') {
+        router.push('/admin/dashboard');
+      } else {
+        // Default to student dashboard or home
+        router.push('/dashboard');
+      }
     }
   };
 

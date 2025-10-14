@@ -173,6 +173,85 @@ export function InstructorDashboardView({
           </div>
         </div>
 
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <Link
+            href="/dashboard/instructor/courses"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg group-hover:scale-110 transition-transform">
+                <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  จัดการ
+                </p>
+                <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  คอร์ส
+                </p>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            href="/dashboard/instructor/students"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg group-hover:scale-110 transition-transform">
+                <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  ดู
+                </p>
+                <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  นักเรียน
+                </p>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            href="/dashboard/instructor/reviews"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg group-hover:scale-110 transition-transform">
+                <Star className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  จัดการ
+                </p>
+                <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  รีวิว
+                </p>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            href="/dashboard/instructor/earnings"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg group-hover:scale-110 transition-transform">
+                <DollarSign className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  ดู
+                </p>
+                <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  รายได้
+                </p>
+              </div>
+            </div>
+          </Link>
+        </div>
+
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column: Courses */}
@@ -184,7 +263,7 @@ export function InstructorDashboardView({
                   คอร์สของฉัน
                 </h2>
                 <Link
-                  href="/instructor/courses"
+                  href="/dashboard/instructor/courses"
                   className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
                 >
                   ดูทั้งหมด →
@@ -197,9 +276,12 @@ export function InstructorDashboardView({
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     ยังไม่มีคอร์ส
                   </p>
-                  <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                  <Link
+                    href="/dashboard/instructor/courses/create"
+                    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                  >
                     สร้างคอร์สแรก
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -242,12 +324,13 @@ export function InstructorDashboardView({
                         >
                           <Eye className="w-5 h-5 text-gray-700 dark:text-gray-300" />
                         </Link>
-                        <button
+                        <Link
+                          href={`/dashboard/instructor/courses/${course.id}/edit`}
                           className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
                           title="แก้ไข"
                         >
                           <Edit className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   ))}
@@ -262,7 +345,7 @@ export function InstructorDashboardView({
                   รีวิวล่าสุด
                 </h2>
                 <Link
-                  href="/instructor/reviews"
+                  href="/dashboard/instructor/reviews"
                   className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
                 >
                   ดูทั้งหมด →
@@ -341,15 +424,24 @@ export function InstructorDashboardView({
                 Quick Actions
               </h2>
               <div className="space-y-3">
-                <button className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                <Link
+                  href="/dashboard/instructor/courses/create"
+                  className="block w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-center"
+                >
                   สร้างคอร์สใหม่
-                </button>
-                <button className="w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors font-semibold">
+                </Link>
+                <Link
+                  href="/dashboard/instructor/courses"
+                  className="block w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors font-semibold text-center"
+                >
                   จัดการเนื้อหา
-                </button>
-                <button className="w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors font-semibold">
+                </Link>
+                <Link
+                  href="/dashboard/instructor/analytics"
+                  className="block w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors font-semibold text-center"
+                >
                   ดูสถิติ
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -417,9 +509,12 @@ export function InstructorDashboardView({
               <p className="text-white/90 mb-4">
                 ยอดเยี่ยม! คุณมีนักเรียนเพิ่มขึ้น 12% จากเดือนที่แล้ว
               </p>
-              <button className="w-full px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors font-semibold backdrop-blur-sm">
+              <Link
+                href="/dashboard/instructor/analytics"
+                className="block w-full px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors font-semibold backdrop-blur-sm text-center"
+              >
                 ดูรายงานเต็ม
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -141,6 +141,15 @@ Status Colors:
 - [x] 📺 **Live Classes** (`/live-classes`) - ✅ เสร็จแล้ว
 - [x] 🎯 **Challenges** (`/challenges`) - ✅ เสร็จแล้ว
 
+### Priority 5 - Instructor Management System (Week 10+)
+- [x] 📚 **Instructor Courses** (`/dashboard/instructor/courses`) - ✅ เสร็จแล้ว
+- [ ] ➕ **Create Course** (`/dashboard/instructor/courses/create`) - สร้างคอร์สใหม่
+- [ ] ✏️ **Edit Course** (`/dashboard/instructor/courses/[id]/edit`) - แก้ไขคอร์ส
+- [x] 👥 **Instructor Students** (`/dashboard/instructor/students`) - ✅ เสร็จแล้ว
+- [x] ⭐ **Instructor Reviews** (`/dashboard/instructor/reviews`) - ✅ เสร็จแล้ว
+- [x] 💰 **Instructor Earnings** (`/dashboard/instructor/earnings`) - ✅ เสร็จแล้ว
+- [x] 📊 **Instructor Analytics** (`/dashboard/instructor/analytics`) - ✅ เสร็จแล้ว
+
 **📋 รายละเอียดแต่ละหน้า:** ดูที่ `TODO_FEATURES.md`
 
 ---

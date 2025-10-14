@@ -6,6 +6,7 @@ import { useAuthStore } from "@/src/presentation/stores/authStore";
 import {
   Award,
   BookOpen,
+  DollarSign,
   Heart,
   LogOut,
   Menu,
@@ -13,8 +14,11 @@ import {
   Search,
   Settings,
   Sun,
+  TrendingUp,
   User,
+  Users,
   X,
+  MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -76,48 +80,93 @@ export function Navbar() {
     document.documentElement.classList.toggle("dark", newDarkMode);
   };
 
-  // Navigation links
+  // Navigation links - different based on user role
   const navLinks = [
     { href: "/", label: "หน้าแรก" },
     { href: "/courses", label: "คอร์สทั้งหมด" },
     { href: "/community", label: "ชุมชน" },
     ...(isAuthenticated && user
-      ? [
-          { href: "/dashboard/student", label: "แดชบอร์ด" },
-          { href: "/achievements", label: "ความสำเร็จ" },
-          { href: "/leaderboard", label: "อันดับ" },
-        ]
+      ? user.role === "instructor"
+        ? [
+            { href: "/dashboard/instructor", label: "แดชบอร์ดผู้สอน" },
+            { href: "/dashboard/instructor/courses", label: "คอร์สของฉัน" },
+            { href: "/dashboard/instructor/students", label: "นักเรียน" },
+          ]
+        : [
+            { href: "/dashboard/student", label: "แดชบอร์ด" },
+            { href: "/achievements", label: "ความสำเร็จ" },
+            { href: "/leaderboard", label: "อันดับ" },
+          ]
       : []),
   ];
 
-  // User menu items
-  const userMenuItems = [
-    {
-      href: "/profile",
-      label: "โปรไฟล์",
-      icon: User,
-    },
-    {
-      href: "/dashboard/student/courses",
-      label: "คอร์สของฉัน",
-      icon: BookOpen,
-    },
-    {
-      href: "/dashboard/student/certificates",
-      label: "ใบประกาศนียบัตร",
-      icon: Award,
-    },
-    {
-      href: "/dashboard/student/wishlist",
-      label: "Wishlist",
-      icon: Heart,
-    },
-    {
-      href: "/dashboard/student/settings",
-      label: "ตั้งค่า",
-      icon: Settings,
-    },
-  ];
+  // User menu items - different based on user role
+  const userMenuItems =
+    user?.role === "instructor"
+      ? [
+          {
+            href: "/profile",
+            label: "โปรไฟล์",
+            icon: User,
+          },
+          {
+            href: "/dashboard/instructor",
+            label: "แดชบอร์ด",
+            icon: TrendingUp,
+          },
+          {
+            href: "/dashboard/instructor/courses",
+            label: "คอร์สของฉัน",
+            icon: BookOpen,
+          },
+          {
+            href: "/dashboard/instructor/students",
+            label: "นักเรียน",
+            icon: Users,
+          },
+          {
+            href: "/dashboard/instructor/reviews",
+            label: "รีวิว",
+            icon: MessageSquare,
+          },
+          {
+            href: "/dashboard/instructor/earnings",
+            label: "รายได้",
+            icon: DollarSign,
+          },
+          {
+            href: "/dashboard/instructor/analytics",
+            label: "วิเคราะห์ข้อมูล",
+            icon: TrendingUp,
+          },
+        ]
+      : [
+          {
+            href: "/profile",
+            label: "โปรไฟล์",
+            icon: User,
+          },
+          {
+            href: "/dashboard/student/courses",
+            label: "คอร์สของฉัน",
+            icon: BookOpen,
+          },
+          {
+            href: "/dashboard/student/certificates",
+            label: "ใบประกาศนียบัตร",
+            icon: Award,
+          },
+          {
+            href: "/dashboard/student/wishlist",
+            label: "Wishlist",
+            icon: Heart,
+          },
+          {
+            href: "/dashboard/student/settings",
+            label: "ตั้งค่า",
+            icon: Settings,
+          },
+        ];
 
   return (
     <nav
