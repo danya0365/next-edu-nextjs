@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { AvatarFallback } from '@/src/presentation/components/common/AvatarFallback';
-import { ImageWithFallback } from '@/src/presentation/components/common/ImageWithFallback';
-import { useLeaderboardPresenter } from '@/src/presentation/presenters/leaderboard/useLeaderboardPresenter';
-import type { LeaderboardViewModel, LeaderboardFilter } from '@/src/presentation/presenters/leaderboard/LeaderboardPresenter';
-import { Trophy, Crown, Medal, TrendingUp, Target, Award } from 'lucide-react';
+import { AvatarFallback } from "@/src/presentation/components/common/AvatarFallback";
+import { ImageWithFallback } from "@/src/presentation/components/common/ImageWithFallback";
+import type {
+  LeaderboardFilter,
+  LeaderboardViewModel,
+} from "@/src/presentation/presenters/leaderboard/LeaderboardPresenter";
+import { useLeaderboardPresenter } from "@/src/presentation/presenters/leaderboard/useLeaderboardPresenter";
+import { Award, Crown, Medal, Target, TrendingUp, Trophy } from "lucide-react";
 
 interface LeaderboardViewProps {
   initialViewModel?: LeaderboardViewModel;
-  userId?: string;
 }
 
-export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewProps) {
-  const { viewModel, loading, error, filter, changeFilter } = useLeaderboardPresenter(
-    initialViewModel,
-    userId
-  );
+export function LeaderboardView({ initialViewModel }: LeaderboardViewProps) {
+  const { viewModel, loading, error, filter, changeFilter } =
+    useLeaderboardPresenter(initialViewModel);
 
   if (loading && !viewModel) {
     return (
@@ -35,7 +35,9 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             เกิดข้อผิดพลาด
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">{error || 'ไม่พบข้อมูล'}</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            {error || "ไม่พบข้อมูล"}
+          </p>
         </div>
       </div>
     );
@@ -44,9 +46,9 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
   const { topThree, leaderboard, currentUserRank, totalPlayers } = viewModel;
 
   const filters: { value: LeaderboardFilter; label: string }[] = [
-    { value: 'all-time', label: 'ตลอดกาล' },
-    { value: 'this-month', label: 'เดือนนี้' },
-    { value: 'this-week', label: 'สัปดาห์นี้' },
+    { value: "all-time", label: "ตลอดกาล" },
+    { value: "this-month", label: "เดือนนี้" },
+    { value: "this-week", label: "สัปดาห์นี้" },
   ];
 
   const getRankIcon = (rank: number) => {
@@ -78,8 +80,8 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
               onClick={() => changeFilter(f.value)}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-colors ${
                 filter === f.value
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? "bg-blue-600 text-white"
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
             >
               {f.label}
@@ -105,7 +107,11 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                       height={80}
                       className="rounded-full mx-auto ring-4 ring-gray-300"
                       fallbackElement={
-                        <AvatarFallback name={topThree[1].displayName} size={80} fontSize="text-xl" />
+                        <AvatarFallback
+                          name={topThree[1].displayName}
+                          size={80}
+                          fontSize="text-xl"
+                        />
                       }
                     />
                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
@@ -154,12 +160,18 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                       1
                     </div>
                   </div>
-                  <h3 className="font-bold text-xl text-white mb-1">{topThree[0].displayName}</h3>
+                  <h3 className="font-bold text-xl text-white mb-1">
+                    {topThree[0].displayName}
+                  </h3>
                   <div className="flex items-center justify-center gap-1 mb-2">
                     <TrendingUp className="w-4 h-4 text-yellow-100" />
-                    <span className="text-sm text-yellow-100">Level {topThree[0].level}</span>
+                    <span className="text-sm text-yellow-100">
+                      Level {topThree[0].level}
+                    </span>
                   </div>
-                  <p className="text-3xl font-bold text-white">{topThree[0].points.toLocaleString()}</p>
+                  <p className="text-3xl font-bold text-white">
+                    {topThree[0].points.toLocaleString()}
+                  </p>
                   <p className="text-sm text-yellow-100">คะแนน</p>
                 </div>
               </div>
@@ -175,7 +187,11 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                       height={80}
                       className="rounded-full mx-auto ring-4 ring-orange-300"
                       fallbackElement={
-                        <AvatarFallback name={topThree[2].displayName} size={80} fontSize="text-xl" />
+                        <AvatarFallback
+                          name={topThree[2].displayName}
+                          size={80}
+                          fontSize="text-xl"
+                        />
                       }
                     />
                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
@@ -226,7 +242,9 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                 </div>
                 <div className="flex-1">
                   <p className="text-white/90 text-sm mb-1">อันดับของคุณ</p>
-                  <h3 className="text-2xl font-bold text-white">#{currentUserRank.rank}</h3>
+                  <h3 className="text-2xl font-bold text-white">
+                    #{currentUserRank.rank}
+                  </h3>
                 </div>
                 <div className="text-right">
                   <p className="text-white/90 text-sm mb-1">คะแนน</p>
@@ -236,7 +254,9 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                 </div>
                 <div className="text-right hidden sm:block">
                   <p className="text-white/90 text-sm mb-1">Level</p>
-                  <p className="text-2xl font-bold text-white">{currentUserRank.level}</p>
+                  <p className="text-2xl font-bold text-white">
+                    {currentUserRank.level}
+                  </p>
                 </div>
               </div>
             </div>
@@ -281,8 +301,8 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                     key={entry.userId}
                     className={`${
                       entry.isCurrentUser
-                        ? 'bg-blue-50 dark:bg-blue-900/20'
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                        ? "bg-blue-50 dark:bg-blue-900/20"
+                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
                     } transition-colors`}
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -303,7 +323,10 @@ export function LeaderboardView({ initialViewModel, userId }: LeaderboardViewPro
                           height={40}
                           className="rounded-full"
                           fallbackElement={
-                            <AvatarFallback name={entry.displayName} size={40} />
+                            <AvatarFallback
+                              name={entry.displayName}
+                              size={40}
+                            />
                           }
                         />
                         <div>

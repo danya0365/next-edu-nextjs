@@ -1,51 +1,66 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useAuthStore } from "@/src/presentation/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
-  ClientCertificatesPresenterFactory,
-  type CertificatesViewModel,
+  CertificatesPresenterFactory,
   type CertificateItem,
-} from './CertificatesPresenter';
+  type CertificatesViewModel,
+} from "./CertificatesPresenter";
 
 export function useCertificatesPresenter(
-  initialViewModel?: CertificatesViewModel,
-  userId?: string
+  initialViewModel?: CertificatesViewModel
 ) {
+  const { isAuthenticated, user } = useAuthStore();
+  const router = useRouter();
   const [viewModel, setViewModel] = useState<CertificatesViewModel | null>(
     initialViewModel || null
   );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCertificate, setSelectedCertificate] = useState<CertificateItem | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCertificate, setSelectedCertificate] =
+    useState<CertificateItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Check authentication
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
 
   useEffect(() => {
-    if (!userId || initialViewModel) return;
+    if (!user || initialViewModel) return;
 
     const loadData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await ClientCertificatesPresenterFactory.create(userId);
+        const presenter = await CertificatesPresenterFactory.createClient();
+        const data = await presenter.getViewModel(user.userId);
         setViewModel(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาดในการโหลดข้อมูล');
+        setError(
+          err instanceof Error ? err.message : "เกิดข้อผิดพลาดในการโหลดข้อมูล"
+        );
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [userId, initialViewModel]);
+  }, [user, initialViewModel]);
 
   // Filter by search
-  const filteredCertificates = viewModel?.certificates.filter((cert) => {
-    if (!searchQuery) return true;
-    return (
-      cert.courseName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cert.certificateNumber.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }) || [];
+  const filteredCertificates =
+    viewModel?.certificates.filter((cert) => {
+      if (!searchQuery) return true;
+      return (
+        cert.courseName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cert.certificateNumber.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }) || [];
 
   // Download certificate (mock)
   const downloadCertificate = (certificate: CertificateItem) => {
@@ -63,7 +78,7 @@ export function useCertificatesPresenter(
         url: window.location.href,
       });
     } else {
-      alert('แชร์ใบประกาศนียบัตรไปยัง social media');
+      alert("แชร์ใบประกาศนียบัตรไปยัง social media");
     }
   };
 

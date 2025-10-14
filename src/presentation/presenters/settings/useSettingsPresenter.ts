@@ -1,14 +1,20 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useAuthStore } from "@/src/presentation/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
-  ClientSettingsPresenterFactory,
+  SettingsPresenterFactory,
   type SettingsViewModel,
   type UserSettings,
-} from './SettingsPresenter';
+} from "./SettingsPresenter";
 
-export function useSettingsPresenter(initialViewModel?: SettingsViewModel, userId?: string) {
-  const [viewModel, setViewModel] = useState<SettingsViewModel | null>(initialViewModel || null);
+export function useSettingsPresenter(initialViewModel?: SettingsViewModel) {
+  const { isAuthenticated, user } = useAuthStore();
+  const router = useRouter();
+  const [viewModel, setViewModel] = useState<SettingsViewModel | null>(
+    initialViewModel || null
+  );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
   const [settings, setSettings] = useState<UserSettings | null>(
@@ -17,8 +23,15 @@ export function useSettingsPresenter(initialViewModel?: SettingsViewModel, userI
   const [hasChanges, setHasChanges] = useState(false);
   const [saving, setSaving] = useState(false);
 
+  // Check authentication
   useEffect(() => {
-    if (!userId || initialViewModel) {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    if (!user || initialViewModel) {
       if (initialViewModel?.settings) {
         setSettings(initialViewModel.settings);
       }
@@ -29,21 +42,27 @@ export function useSettingsPresenter(initialViewModel?: SettingsViewModel, userI
       try {
         setLoading(true);
         setError(null);
-        const data = await ClientSettingsPresenterFactory.create(userId);
+        const presenter = await SettingsPresenterFactory.createClient();
+        const data = await presenter.getViewModel(user.userId);
         setViewModel(data);
         setSettings(data.settings);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาดในการโหลดข้อมูล');
+        setError(
+          err instanceof Error ? err.message : "เกิดข้อผิดพลาดในการโหลดข้อมูล"
+        );
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [userId, initialViewModel]);
+  }, [user, initialViewModel]);
 
   // Update setting
-  const updateSetting = <K extends keyof UserSettings>(key: K, value: UserSettings[K]) => {
+  const updateSetting = <K extends keyof UserSettings>(
+    key: K,
+    value: UserSettings[K]
+  ) => {
     if (!settings) return;
 
     setSettings({
@@ -61,11 +80,11 @@ export function useSettingsPresenter(initialViewModel?: SettingsViewModel, userI
       setSaving(true);
       // TODO: Save to backend
       await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-      
+
       setHasChanges(false);
-      alert('บันทึกการตั้งค่าสำเร็จ!');
+      alert("บันทึกการตั้งค่าสำเร็จ!");
     } catch {
-      alert('เกิดข้อผิดพลาดในการบันทึก กรุณาลองใหม่อีกครั้ง');
+      alert("เกิดข้อผิดพลาดในการบันทึก กรุณาลองใหม่อีกครั้ง");
     } finally {
       setSaving(false);
     }
@@ -75,7 +94,7 @@ export function useSettingsPresenter(initialViewModel?: SettingsViewModel, userI
   const resetToDefaults = () => {
     if (!viewModel) return;
 
-    if (confirm('คุณต้องการรีเซ็ตการตั้งค่าเป็นค่าเริ่มต้นหรือไม่?')) {
+    if (confirm("คุณต้องการรีเซ็ตการตั้งค่าเป็นค่าเริ่มต้นหรือไม่?")) {
       setSettings(viewModel.settings);
       setHasChanges(false);
     }

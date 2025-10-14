@@ -20,8 +20,19 @@ export interface CertificatesViewModel {
   totalCertificates: number;
 }
 
+/**
+ * Presenter for Certificates management
+ * Follows Clean Architecture with proper separation of concerns
+ */
 export class CertificatesPresenter {
-  static async getViewModel(userId: string): Promise<CertificatesViewModel> {
+  constructor() {
+    // Mock data - no supabase client needed
+  }
+
+  /**
+   * Get view model for the page
+   */
+  async getViewModel(userId: string): Promise<CertificatesViewModel> {
     // Get student data
     const student = students.find((s) => s.userId === userId);
     if (!student) {
@@ -61,16 +72,30 @@ export class CertificatesPresenter {
   }
 }
 
-// Server-side factory
-export class ServerCertificatesPresenterFactory {
-  static async create(userId: string): Promise<CertificatesViewModel> {
-    return CertificatesPresenter.getViewModel(userId);
+/**
+ * Factory for creating CertificatesPresenter instances
+ */
+export class CertificatesPresenterFactory {
+  static async createServer(): Promise<CertificatesPresenter> {
+    return new CertificatesPresenter();
+  }
+
+  static async createClient(): Promise<CertificatesPresenter> {
+    return new CertificatesPresenter();
   }
 }
 
-// Client-side factory
+// Backward compatibility exports
+export class ServerCertificatesPresenterFactory {
+  static async create(userId: string): Promise<CertificatesViewModel> {
+    const presenter = await CertificatesPresenterFactory.createServer();
+    return presenter.getViewModel(userId);
+  }
+}
+
 export class ClientCertificatesPresenterFactory {
   static async create(userId: string): Promise<CertificatesViewModel> {
-    return CertificatesPresenter.getViewModel(userId);
+    const presenter = await CertificatesPresenterFactory.createClient();
+    return presenter.getViewModel(userId);
   }
 }

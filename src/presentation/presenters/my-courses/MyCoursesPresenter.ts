@@ -40,8 +40,19 @@ export interface MyCoursesViewModel {
 
 export type CourseFilter = 'all' | 'in-progress' | 'completed' | 'paused';
 
+/**
+ * Presenter for My Courses management
+ * Follows Clean Architecture with proper separation of concerns
+ */
 export class MyCoursesPresenter {
-  static async getViewModel(userId: string, filter: CourseFilter = 'all'): Promise<MyCoursesViewModel> {
+  constructor() {
+    // Mock data - no supabase client needed
+  }
+
+  /**
+   * Get view model for the page
+   */
+  async getViewModel(userId: string, filter: CourseFilter = 'all'): Promise<MyCoursesViewModel> {
     // Get student data
     const student = students.find((s) => s.userId === userId);
     if (!student) {
@@ -111,16 +122,30 @@ export class MyCoursesPresenter {
   }
 }
 
-// Server-side factory
-export class ServerMyCoursesPresenterFactory {
-  static async create(userId: string, filter: CourseFilter = 'all'): Promise<MyCoursesViewModel> {
-    return MyCoursesPresenter.getViewModel(userId, filter);
+/**
+ * Factory for creating MyCoursesPresenter instances
+ */
+export class MyCoursesPresenterFactory {
+  static async createServer(): Promise<MyCoursesPresenter> {
+    return new MyCoursesPresenter();
+  }
+
+  static async createClient(): Promise<MyCoursesPresenter> {
+    return new MyCoursesPresenter();
   }
 }
 
-// Client-side factory
+// Backward compatibility exports
+export class ServerMyCoursesPresenterFactory {
+  static async create(userId: string, filter: CourseFilter = 'all'): Promise<MyCoursesViewModel> {
+    const presenter = await MyCoursesPresenterFactory.createServer();
+    return presenter.getViewModel(userId, filter);
+  }
+}
+
 export class ClientMyCoursesPresenterFactory {
   static async create(userId: string, filter: CourseFilter = 'all'): Promise<MyCoursesViewModel> {
-    return MyCoursesPresenter.getViewModel(userId, filter);
+    const presenter = await MyCoursesPresenterFactory.createClient();
+    return presenter.getViewModel(userId, filter);
   }
 }

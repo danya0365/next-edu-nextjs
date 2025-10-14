@@ -1,10 +1,10 @@
-import { Shield, Lock, Eye, Database, Mail, AlertCircle } from 'lucide-react';
-import { Metadata } from 'next';
-import Link from 'next/link';
+import { AlertCircle, Database, Eye, Lock, Mail, Shield } from "lucide-react";
+import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'นโยบายความเป็นส่วนตัว | Next Edu',
-  description: 'นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลของ Next Edu',
+  title: "นโยบายความเป็นส่วนตัว | Next Edu",
+  description: "นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลของ Next Edu",
 };
 
 export default function PrivacyPage() {
@@ -43,24 +43,29 @@ export default function PrivacyPage() {
             </div>
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
               <p>
-                เราเก็บรวบรวมข้อมูลเพื่อให้บริการที่ดีที่สุดแก่คุณ ข้อมูลที่เราเก็บรวบรวม
-                ได้แก่:
+                เราเก็บรวบรวมข้อมูลเพื่อให้บริการที่ดีที่สุดแก่คุณ
+                ข้อมูลที่เราเก็บรวบรวม ได้แก่:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
-                  <strong>ข้อมูลส่วนตัว:</strong> ชื่อ, อีเมล, เบอร์โทรศัพท์, วันเกิด, รูปโปรไฟล์
+                  <strong>ข้อมูลส่วนตัว:</strong> ชื่อ, อีเมล, เบอร์โทรศัพท์,
+                  วันเกิด, รูปโปรไฟล์
                 </li>
                 <li>
-                  <strong>ข้อมูลการศึกษา:</strong> ชื่อโรงเรียน, ระดับชั้น, ความสนใจ
+                  <strong>ข้อมูลการศึกษา:</strong> ชื่อโรงเรียน, ระดับชั้น,
+                  ความสนใจ
                 </li>
                 <li>
-                  <strong>ข้อมูลการใช้งาน:</strong> ประวัติการเรียน, ความคืบหน้า, คะแนน, ความสำเร็จ
+                  <strong>ข้อมูลการใช้งาน:</strong> ประวัติการเรียน,
+                  ความคืบหน้า, คะแนน, ความสำเร็จ
                 </li>
                 <li>
-                  <strong>ข้อมูลทางเทคนิค:</strong> IP Address, Browser, Device, Cookies
+                  <strong>ข้อมูลทางเทคนิค:</strong> IP Address, Browser, Device,
+                  Cookies
                 </li>
                 <li>
-                  <strong>ข้อมูลการชำระเงิน:</strong> ประวัติการสั่งซื้อ (เราไม่เก็บข้อมูลบัตรเครดิต)
+                  <strong>ข้อมูลการชำระเงิน:</strong> ประวัติการสั่งซื้อ
+                  (เราไม่เก็บข้อมูลบัตรเครดิต)
                 </li>
               </ul>
             </div>
@@ -104,16 +109,19 @@ export default function PrivacyPage() {
               <p>เราให้ความสำคัญกับความปลอดภัยของข้อมูลของคุณเป็นอย่างยิ่ง:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
-                  <strong>การเข้ารหัส:</strong> ใช้ SSL/TLS encryption สำหรับการส่งข้อมูล
+                  <strong>การเข้ารหัส:</strong> ใช้ SSL/TLS encryption
+                  สำหรับการส่งข้อมูล
                 </li>
                 <li>
-                  <strong>การยืนยันตัวตน:</strong> ระบบ Two-Factor Authentication (2FA)
+                  <strong>การยืนยันตัวตน:</strong> ระบบ Two-Factor
+                  Authentication (2FA)
                 </li>
                 <li>
                   <strong>การจัดเก็บ:</strong> เก็บข้อมูลใน Secure Cloud Servers
                 </li>
                 <li>
-                  <strong>การเข้าถึง:</strong> จำกัดการเข้าถึงเฉพาะพนักงานที่จำเป็น
+                  <strong>การเข้าถึง:</strong>{" "}
+                  จำกัดการเข้าถึงเฉพาะพนักงานที่จำเป็น
                 </li>
                 <li>
                   <strong>การสำรองข้อมูล:</strong> Backup ข้อมูลเป็นประจำ
@@ -136,11 +144,12 @@ export default function PrivacyPage() {
               <p>เราจะไม่แบ่งปันข้อมูลส่วนบุคคลของคุณ ยกเว้นในกรณีต่อไปนี้:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
-                  <strong>ด้วยความยินยอม:</strong> เมื่อคุณให้ความยินยอมอย่างชัดเจน
+                  <strong>ด้วยความยินยอม:</strong>{" "}
+                  เมื่อคุณให้ความยินยอมอย่างชัดเจน
                 </li>
                 <li>
-                  <strong>ผู้ให้บริการ:</strong> เช่น Payment Gateway, Cloud Hosting
-                  (ภายใต้สัญญารักษาความลับ)
+                  <strong>ผู้ให้บริการ:</strong> เช่น Payment Gateway, Cloud
+                  Hosting (ภายใต้สัญญารักษาความลับ)
                 </li>
                 <li>
                   <strong>ตามกฎหมาย:</strong> เมื่อมีคำสั่งศาลหรือหน่วยงานราชการ
@@ -183,14 +192,15 @@ export default function PrivacyPage() {
                   <strong>คัดค้าน:</strong> คัดค้านการประมวลผลข้อมูล
                 </li>
                 <li>
-                  <strong>โอนย้าย:</strong> ขอรับข้อมูลในรูปแบบที่อ่านได้ด้วยเครื่อง
+                  <strong>โอนย้าย:</strong>{" "}
+                  ขอรับข้อมูลในรูปแบบที่อ่านได้ด้วยเครื่อง
                 </li>
                 <li>
                   <strong>ถอนความยินยอม:</strong> ถอนความยินยอมเมื่อใดก็ได้
                 </li>
               </ul>
               <p className="mt-4">
-                หากต้องการใช้สิทธิ์ใดๆ โปรดติดต่อเราที่{' '}
+                หากต้องการใช้สิทธิ์ใดๆ โปรดติดต่อเราที่{" "}
                 <a
                   href="mailto:privacy@nextedu.com"
                   className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -241,13 +251,15 @@ export default function PrivacyPage() {
               8. ติดต่อเรา
             </h2>
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
-              <p>หากคุณมีคำถามเกี่ยวกับนโยบายความเป็นส่วนตัว โปรดติดต่อเราที่:</p>
+              <p>
+                หากคุณมีคำถามเกี่ยวกับนโยบายความเป็นส่วนตัว โปรดติดต่อเราที่:
+              </p>
               <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg space-y-2">
                 <p>
                   <strong>บริษัท:</strong> Next Edu Thailand Co., Ltd.
                 </p>
                 <p>
-                  <strong>อีเมล:</strong>{' '}
+                  <strong>อีเมล:</strong>{" "}
                   <a
                     href="mailto:privacy@nextedu.com"
                     className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -259,7 +271,8 @@ export default function PrivacyPage() {
                   <strong>โทร:</strong> 02-XXX-XXXX
                 </p>
                 <p>
-                  <strong>ที่อยู่:</strong> 123 ถนนสุขุมวิท แขวงคลองเตย กรุงเทพฯ 10110
+                  <strong>ที่อยู่:</strong> 123 ถนนสุขุมวิท แขวงคลองเตย กรุงเทพฯ
+                  10110
                 </p>
               </div>
             </div>

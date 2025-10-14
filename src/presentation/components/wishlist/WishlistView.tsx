@@ -1,22 +1,19 @@
-'use client';
+"use client";
 
-import { AvatarFallback } from '@/src/presentation/components/common/AvatarFallback';
-import { ImageWithFallback } from '@/src/presentation/components/common/ImageWithFallback';
-import { useWishlistPresenter } from '@/src/presentation/presenters/wishlist/useWishlistPresenter';
-import type { WishlistViewModel } from '@/src/presentation/presenters/wishlist/WishlistPresenter';
-import { Heart, Play, X, Star, Clock, BookOpen } from 'lucide-react';
-import Link from 'next/link';
+import { AvatarFallback } from "@/src/presentation/components/common/AvatarFallback";
+import { ImageWithFallback } from "@/src/presentation/components/common/ImageWithFallback";
+import { useWishlistPresenter } from "@/src/presentation/presenters/wishlist/useWishlistPresenter";
+import type { WishlistViewModel } from "@/src/presentation/presenters/wishlist/WishlistPresenter";
+import { BookOpen, Clock, Heart, Play, Star, X } from "lucide-react";
+import Link from "next/link";
 
 interface WishlistViewProps {
   initialViewModel?: WishlistViewModel;
-  userId?: string;
 }
 
-export function WishlistView({ initialViewModel, userId }: WishlistViewProps) {
-  const { viewModel, loading, error, removeFromWishlist, startLearning } = useWishlistPresenter(
-    initialViewModel,
-    userId
-  );
+export function WishlistView({ initialViewModel }: WishlistViewProps) {
+  const { viewModel, loading, error, removeFromWishlist } =
+    useWishlistPresenter(initialViewModel);
 
   if (loading && !viewModel) {
     return (
@@ -33,8 +30,12 @@ export function WishlistView({ initialViewModel, userId }: WishlistViewProps) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">เกิดข้อผิดพลาด</h1>
-          <p className="text-gray-600 dark:text-gray-400">{error || 'ไม่พบข้อมูล'}</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            เกิดข้อผิดพลาด
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            {error || "ไม่พบข้อมูล"}
+          </p>
         </div>
       </div>
     );
@@ -49,7 +50,9 @@ export function WishlistView({ initialViewModel, userId }: WishlistViewProps) {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Heart className="w-8 h-8 text-pink-500 fill-pink-500" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Wishlist</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              Wishlist
+            </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
             คอร์สที่คุณสนใจและอยากเรียน ({totalCourses} คอร์ส)
@@ -149,8 +152,12 @@ export function WishlistView({ initialViewModel, userId }: WishlistViewProps) {
                           <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                             <div className="flex items-center gap-1">
                               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                              <span className="font-semibold">{course.rating}</span>
-                              <span>({course.studentCount.toLocaleString()})</span>
+                              <span className="font-semibold">
+                                {course.rating}
+                              </span>
+                              <span>
+                                ({course.studentCount.toLocaleString()})
+                              </span>
                             </div>
                             <div className="flex items-center gap-1">
                               <Clock className="w-4 h-4" />

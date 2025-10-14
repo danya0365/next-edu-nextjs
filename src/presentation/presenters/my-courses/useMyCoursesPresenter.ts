@@ -1,45 +1,59 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useAuthStore } from "@/src/presentation/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
-  ClientMyCoursesPresenterFactory,
-  type MyCoursesViewModel,
+  MyCoursesPresenterFactory,
   type CourseFilter,
-} from './MyCoursesPresenter';
+  type MyCoursesViewModel,
+} from "./MyCoursesPresenter";
 
-export function useMyCoursesPresenter(
-  initialViewModel?: MyCoursesViewModel,
-  userId?: string
-) {
+export function useMyCoursesPresenter(initialViewModel?: MyCoursesViewModel) {
+  const { isAuthenticated, user } = useAuthStore();
+  const router = useRouter();
   const [viewModel, setViewModel] = useState<MyCoursesViewModel | null>(
     initialViewModel || null
   );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState<CourseFilter>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState<CourseFilter>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Check authentication
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
 
   // Load data
   const loadData = async (newFilter?: CourseFilter) => {
-    if (!userId) return;
+    if (!user) return;
 
     try {
       setLoading(true);
       setError(null);
-      const data = await ClientMyCoursesPresenterFactory.create(userId, newFilter || filter);
+      const presenter = await MyCoursesPresenterFactory.createClient();
+      const data = await presenter.getViewModel(
+        user.userId,
+        newFilter || filter
+      );
       setViewModel(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาดในการโหลดข้อมูล');
+      setError(
+        err instanceof Error ? err.message : "เกิดข้อผิดพลาดในการโหลดข้อมูล"
+      );
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!userId || initialViewModel) return;
+    if (!user || initialViewModel) return;
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [user]);
 
   // Change filter
   const changeFilter = async (newFilter: CourseFilter) => {
@@ -48,14 +62,15 @@ export function useMyCoursesPresenter(
   };
 
   // Filter by search
-  const filteredCourses = viewModel?.courses.filter((course) => {
-    if (!searchQuery) return true;
-    return (
-      course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      course.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      course.instructorName.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }) || [];
+  const filteredCourses =
+    viewModel?.courses.filter((course) => {
+      if (!searchQuery) return true;
+      return (
+        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.instructorName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }) || [];
 
   // Refresh
   const refresh = async () => {

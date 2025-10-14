@@ -1,35 +1,51 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useAuthStore } from "@/src/presentation/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
-  ClientWishlistPresenterFactory,
-  type WishlistViewModel,
+  WishlistPresenterFactory,
   type WishlistCourse,
-} from './WishlistPresenter';
+  type WishlistViewModel,
+} from "./WishlistPresenter";
 
-export function useWishlistPresenter(initialViewModel?: WishlistViewModel, userId?: string) {
-  const [viewModel, setViewModel] = useState<WishlistViewModel | null>(initialViewModel || null);
+export function useWishlistPresenter(initialViewModel?: WishlistViewModel) {
+  const { isAuthenticated, user } = useAuthStore();
+  const router = useRouter();
+  const [viewModel, setViewModel] = useState<WishlistViewModel | null>(
+    initialViewModel || null
+  );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
 
+  // Check authentication
   useEffect(() => {
-    if (!userId || initialViewModel) return;
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    if (!user || initialViewModel) return;
 
     const loadData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await ClientWishlistPresenterFactory.create(userId);
+        const presenter = await WishlistPresenterFactory.createClient();
+        const data = await presenter.getViewModel(user.userId);
         setViewModel(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาดในการโหลดข้อมูล');
+        setError(
+          err instanceof Error ? err.message : "เกิดข้อผิดพลาดในการโหลดข้อมูล"
+        );
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [userId, initialViewModel]);
+  }, [user, initialViewModel]);
 
   // Remove from wishlist (mock)
   const removeFromWishlist = (courseId: string) => {

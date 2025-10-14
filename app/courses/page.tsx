@@ -1,13 +1,13 @@
-import { CoursesView } from '@/src/presentation/components/courses/CoursesView';
+import { CoursesView } from "@/src/presentation/components/courses/CoursesView";
 import {
-  CoursesPresenterFactory,
   CoursesFilters,
-} from '@/src/presentation/presenters/courses/CoursesPresenter';
-import type { Metadata } from 'next';
-import Link from 'next/link';
+  CoursesPresenterFactory,
+} from "@/src/presentation/presenters/courses/CoursesPresenter";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 // Tell Next.js this is a dynamic page
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface CoursesPageProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -29,12 +29,13 @@ export async function generateMetadata({
 
     return presenter.generateMetadata(filters);
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
 
     // Fallback metadata
     return {
-      title: 'คอร์สทั้งหมด | Next Edu',
-      description: 'เรียนรู้ทักษะใหม่ๆ กับคอร์สออนไลน์มากมาย สำหรับเด็กและเยาวชน',
+      title: "คอร์สทั้งหมด | Next Edu",
+      description:
+        "เรียนรู้ทักษะใหม่ๆ กับคอร์สออนไลน์มากมาย สำหรับเด็กและเยาวชน",
     };
   }
 }
@@ -66,14 +67,16 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
 
     return <CoursesView initialViewModel={viewModel} />;
   } catch (error) {
-    console.error('Error fetching courses data:', error);
+    console.error("Error fetching courses data:", error);
 
     // Fallback UI
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">😕</div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">เกิดข้อผิดพลาด</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            เกิดข้อผิดพลาด
+          </h1>
           <p className="text-gray-600 mb-4">ไม่สามารถโหลดข้อมูลคอร์สได้</p>
           <Link
             href="/"

@@ -1,36 +1,22 @@
 "use client";
 
+import { useAuthStore } from "@/src/presentation/stores/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAuthStore } from "../../stores/authStore";
 import {
-  ClientAchievementsPresenterFactory,
-  type AchievementItem,
-  type AchievementsViewModel,
-} from "./AchievementsPresenter";
+  InstructorDashboardPresenterFactory,
+  type InstructorDashboardViewModel,
+} from "./InstructorDashboardPresenter";
 
-export type AchievementFilter =
-  | "all"
-  | "unlocked"
-  | "locked"
-  | "common"
-  | "rare"
-  | "epic"
-  | "legendary";
-
-export function useAchievementsPresenter(
-  initialViewModel?: AchievementsViewModel
+export function useInstructorDashboardPresenter(
+  initialViewModel?: InstructorDashboardViewModel
 ) {
   const { isAuthenticated, user } = useAuthStore();
   const router = useRouter();
-  const [viewModel, setViewModel] = useState<AchievementsViewModel | null>(
-    initialViewModel || null
-  );
+  const [viewModel, setViewModel] =
+    useState<InstructorDashboardViewModel | null>(initialViewModel || null);
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState<AchievementFilter>("all");
-  const [selectedAchievement, setSelectedAchievement] =
-    useState<AchievementItem | null>(null);
 
   // Check authentication
   useEffect(() => {
@@ -39,7 +25,6 @@ export function useAchievementsPresenter(
     }
   }, [isAuthenticated, router]);
 
-  // Load data
   useEffect(() => {
     if (!user?.id || initialViewModel) return;
 
@@ -47,7 +32,9 @@ export function useAchievementsPresenter(
       try {
         setLoading(true);
         setError(null);
-        const data = await ClientAchievementsPresenterFactory.create(user.id);
+        const presenter =
+          await InstructorDashboardPresenterFactory.createClient();
+        const data = await presenter.getViewModel(user.id);
         setViewModel(data);
       } catch (err) {
         setError(
@@ -61,23 +48,15 @@ export function useAchievementsPresenter(
     loadData();
   }, [user?.id, initialViewModel]);
 
-  // Filter achievements
-  const filteredAchievements =
-    viewModel?.achievements.filter((achievement) => {
-      if (filter === "all") return true;
-      if (filter === "unlocked") return achievement.isUnlocked;
-      if (filter === "locked") return !achievement.isUnlocked;
-      return achievement.rarity === filter;
-    }) || [];
-
-  // Refresh data
   const refresh = async () => {
     if (!user?.id) return;
 
     try {
       setLoading(true);
       setError(null);
-      const data = await ClientAchievementsPresenterFactory.create(user.id);
+      const presenter =
+        await InstructorDashboardPresenterFactory.createClient();
+      const data = await presenter.getViewModel(user.id);
       setViewModel(data);
     } catch (err) {
       setError(
@@ -92,11 +71,6 @@ export function useAchievementsPresenter(
     viewModel,
     loading,
     error,
-    filter,
-    setFilter,
-    filteredAchievements,
-    selectedAchievement,
-    setSelectedAchievement,
     refresh,
   };
 }

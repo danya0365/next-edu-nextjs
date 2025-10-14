@@ -1,18 +1,20 @@
-'use client';
+"use client";
 
-import { AvatarFallback } from '@/src/presentation/components/common/AvatarFallback';
-import { ImageWithFallback } from '@/src/presentation/components/common/ImageWithFallback';
-import { useMyCoursesPresenter } from '@/src/presentation/presenters/my-courses/useMyCoursesPresenter';
-import type { MyCoursesViewModel, CourseFilter } from '@/src/presentation/presenters/my-courses/MyCoursesPresenter';
-import { BookOpen, Clock, Play, Search, TrendingUp } from 'lucide-react';
-import Link from 'next/link';
+import { AvatarFallback } from "@/src/presentation/components/common/AvatarFallback";
+import { ImageWithFallback } from "@/src/presentation/components/common/ImageWithFallback";
+import type {
+  CourseFilter,
+  MyCoursesViewModel,
+} from "@/src/presentation/presenters/my-courses/MyCoursesPresenter";
+import { useMyCoursesPresenter } from "@/src/presentation/presenters/my-courses/useMyCoursesPresenter";
+import { BookOpen, Clock, Play, Search, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 interface MyCoursesViewProps {
   initialViewModel?: MyCoursesViewModel;
-  userId?: string;
 }
 
-export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) {
+export function MyCoursesView({ initialViewModel }: MyCoursesViewProps) {
   const {
     viewModel,
     loading,
@@ -22,7 +24,7 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
     searchQuery,
     setSearchQuery,
     filteredCourses,
-  } = useMyCoursesPresenter(initialViewModel, userId);
+  } = useMyCoursesPresenter(initialViewModel);
 
   if (loading && !viewModel) {
     return (
@@ -39,8 +41,12 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">เกิดข้อผิดพลาด</h1>
-          <p className="text-gray-600 dark:text-gray-400">{error || 'ไม่พบข้อมูล'}</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            เกิดข้อผิดพลาด
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            {error || "ไม่พบข้อมูล"}
+          </p>
         </div>
       </div>
     );
@@ -49,10 +55,10 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
   const { stats } = viewModel;
 
   const filters: { value: CourseFilter; label: string }[] = [
-    { value: 'all', label: 'ทั้งหมด' },
-    { value: 'in-progress', label: 'กำลังเรียน' },
-    { value: 'completed', label: 'เรียนจบแล้ว' },
-    { value: 'paused', label: 'หยุดชั่วคราว' },
+    { value: "all", label: "ทั้งหมด" },
+    { value: "in-progress", label: "กำลังเรียน" },
+    { value: "completed", label: "เรียนจบแล้ว" },
+    { value: "paused", label: "หยุดชั่วคราว" },
   ];
 
   return (
@@ -60,7 +66,9 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">คอร์สของฉัน</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            คอร์สของฉัน
+          </h1>
           <p className="text-gray-600 dark:text-gray-400">
             ติดตามความคืบหน้าและเรียนต่อจากที่ค้าง
           </p>
@@ -73,9 +81,13 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
               <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                 <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">คอร์สทั้งหมด</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                คอร์สทั้งหมด
+              </p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.totalCourses}</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              {stats.totalCourses}
+            </p>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
@@ -83,9 +95,13 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
               <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
                 <Play className="w-5 h-5 text-orange-600 dark:text-orange-400" />
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">กำลังเรียน</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                กำลังเรียน
+              </p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.inProgress}</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              {stats.inProgress}
+            </p>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
@@ -93,9 +109,13 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
               <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
                 <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">เรียนจบ</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                เรียนจบ
+              </p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.completed}</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              {stats.completed}
+            </p>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
@@ -103,7 +123,9 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
               <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
                 <Clock className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">เวลาเรียน</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                เวลาเรียน
+              </p>
             </div>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               {stats.totalHours}
@@ -122,8 +144,8 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
                 onClick={() => changeFilter(f.value)}
                 className={`px-6 py-3 rounded-full text-sm font-medium transition-colors ${
                   filter === f.value
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    ? "bg-blue-600 text-white"
+                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                 }`}
               >
                 {f.label}
@@ -149,12 +171,12 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
           <div className="text-center py-16">
             <div className="text-6xl mb-4">📚</div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-              {searchQuery ? 'ไม่พบคอร์สที่ค้นหา' : 'ยังไม่มีคอร์ส'}
+              {searchQuery ? "ไม่พบคอร์สที่ค้นหา" : "ยังไม่มีคอร์ส"}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               {searchQuery
-                ? 'ลองค้นหาด้วยคำอื่น'
-                : 'เริ่มต้นการเรียนรู้ด้วยการเลือกคอร์สที่คุณสนใจ'}
+                ? "ลองค้นหาด้วยคำอื่น"
+                : "เริ่มต้นการเรียนรู้ด้วยการเลือกคอร์สที่คุณสนใจ"}
             </p>
             {!searchQuery && (
               <Link
@@ -194,7 +216,7 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
                   </div>
 
                   {/* Status Badge */}
-                  {course.status === 'completed' && (
+                  {course.status === "completed" && (
                     <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-green-500 text-white">
                       ✓ จบแล้ว
                     </div>
@@ -232,7 +254,9 @@ export function MyCoursesView({ initialViewModel, userId }: MyCoursesViewProps) 
                   {/* Progress */}
                   <div className="mb-3">
                     <div className="flex items-center justify-between text-sm mb-1">
-                      <span className="text-gray-600 dark:text-gray-400">ความคืบหน้า</span>
+                      <span className="text-gray-600 dark:text-gray-400">
+                        ความคืบหน้า
+                      </span>
                       <span className="font-semibold text-blue-600 dark:text-blue-400">
                         {course.progress}%
                       </span>

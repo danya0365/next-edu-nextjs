@@ -1,10 +1,10 @@
-import { CourseDetailView } from '@/src/presentation/components/course-detail/CourseDetailView';
-import { CourseDetailPresenterFactory } from '@/src/presentation/presenters/course-detail/CourseDetailPresenter';
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import { CourseDetailView } from "@/src/presentation/components/course-detail/CourseDetailView";
+import { CourseDetailPresenterFactory } from "@/src/presentation/presenters/course-detail/CourseDetailPresenter";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 // Tell Next.js this is a dynamic page
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface CourseDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -22,12 +22,12 @@ export async function generateMetadata({
   try {
     return presenter.generateMetadata(resolvedParams.slug);
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
 
     // Fallback metadata
     return {
-      title: 'คอร์ส | Next Edu',
-      description: 'เรียนรู้ทักษะใหม่ๆ กับคอร์สออนไลน์',
+      title: "คอร์ส | Next Edu",
+      description: "เรียนรู้ทักษะใหม่ๆ กับคอร์สออนไลน์",
     };
   }
 }
@@ -36,7 +36,9 @@ export async function generateMetadata({
  * Course Detail page - Server Component for SEO optimization
  * Uses presenter pattern following Clean Architecture
  */
-export default async function CourseDetailPage({ params }: CourseDetailPageProps) {
+export default async function CourseDetailPage({
+  params,
+}: CourseDetailPageProps) {
   const resolvedParams = await params;
   const presenter = await CourseDetailPresenterFactory.create();
 
@@ -46,7 +48,7 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
 
     return <CourseDetailView initialViewModel={viewModel} />;
   } catch (error) {
-    console.error('Error fetching course detail data:', error);
+    console.error("Error fetching course detail data:", error);
 
     // Fallback UI
     return (

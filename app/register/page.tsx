@@ -1,9 +1,9 @@
-import { RegisterView } from '@/src/presentation/components/auth/RegisterView';
-import { RegisterPresenterFactory } from '@/src/presentation/presenters/auth/RegisterPresenter';
-import type { Metadata } from 'next';
+import { RegisterView } from "@/src/presentation/components/auth/RegisterView";
+import { RegisterPresenterFactory } from "@/src/presentation/presenters/auth/RegisterPresenter";
+import type { Metadata } from "next";
 
 // Tell Next.js this is a dynamic page
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 /**
  * Generate metadata for the page
@@ -14,12 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     return presenter.generateMetadata();
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
 
     // Fallback metadata
     return {
-      title: 'สมัครสมาชิก | Next Edu',
-      description: 'สมัครสมาชิกเพื่อเริ่มเรียนออนไลน์ฟรี',
+      title: "สมัครสมาชิก | Next Edu",
+      description: "สมัครสมาชิกเพื่อเริ่มเรียนออนไลน์ฟรี",
     };
   }
 }
@@ -37,7 +37,7 @@ export default async function RegisterPage() {
 
     return <RegisterView initialViewModel={viewModel} />;
   } catch (error) {
-    console.error('Error fetching register data:', error);
+    console.error("Error fetching register data:", error);
 
     // Fallback UI
     return <RegisterView />;

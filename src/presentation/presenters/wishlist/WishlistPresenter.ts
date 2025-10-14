@@ -33,8 +33,19 @@ export interface WishlistViewModel {
   totalCourses: number;
 }
 
+/**
+ * Presenter for Wishlist management
+ * Follows Clean Architecture with proper separation of concerns
+ */
 export class WishlistPresenter {
-  static async getViewModel(userId: string): Promise<WishlistViewModel> {
+  constructor() {
+    // Mock data - no supabase client needed
+  }
+
+  /**
+   * Get view model for the page
+   */
+  async getViewModel(userId: string): Promise<WishlistViewModel> {
     // Get student data
     const student = students.find((s) => s.userId === userId);
     if (!student) {
@@ -91,16 +102,30 @@ export class WishlistPresenter {
   }
 }
 
-// Server-side factory
-export class ServerWishlistPresenterFactory {
-  static async create(userId: string): Promise<WishlistViewModel> {
-    return WishlistPresenter.getViewModel(userId);
+/**
+ * Factory for creating WishlistPresenter instances
+ */
+export class WishlistPresenterFactory {
+  static async createServer(): Promise<WishlistPresenter> {
+    return new WishlistPresenter();
+  }
+
+  static async createClient(): Promise<WishlistPresenter> {
+    return new WishlistPresenter();
   }
 }
 
-// Client-side factory
+// Backward compatibility exports
+export class ServerWishlistPresenterFactory {
+  static async create(userId: string): Promise<WishlistViewModel> {
+    const presenter = await WishlistPresenterFactory.createServer();
+    return presenter.getViewModel(userId);
+  }
+}
+
 export class ClientWishlistPresenterFactory {
   static async create(userId: string): Promise<WishlistViewModel> {
-    return WishlistPresenter.getViewModel(userId);
+    const presenter = await WishlistPresenterFactory.createClient();
+    return presenter.getViewModel(userId);
   }
 }

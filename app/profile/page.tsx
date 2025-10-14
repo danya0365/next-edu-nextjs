@@ -1,9 +1,9 @@
-import { ProfileView } from '@/src/presentation/components/profile/ProfileView';
-import { ProfilePresenterFactory } from '@/src/presentation/presenters/profile/ProfilePresenter';
-import type { Metadata } from 'next';
+import { ProfileView } from "@/src/presentation/components/profile/ProfileView";
+import { ProfilePresenterFactory } from "@/src/presentation/presenters/profile/ProfilePresenter";
+import type { Metadata } from "next";
 
 // Tell Next.js this is a dynamic page
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 /**
  * Generate metadata for the page
@@ -14,12 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     return presenter.generateMetadata();
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
 
     // Fallback metadata
     return {
-      title: 'โปรไฟล์ | Next Edu',
-      description: 'จัดการโปรไฟล์และข้อมูลส่วนตัวของคุณ',
+      title: "โปรไฟล์ | Next Edu",
+      description: "จัดการโปรไฟล์และข้อมูลส่วนตัวของคุณ",
     };
   }
 }
@@ -37,7 +37,7 @@ export default async function ProfilePage() {
 
     return <ProfileView initialViewModel={viewModel} />;
   } catch (error) {
-    console.error('Error fetching profile data:', error);
+    console.error("Error fetching profile data:", error);
 
     // Fallback UI
     return <ProfileView />;

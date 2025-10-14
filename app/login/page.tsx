@@ -1,9 +1,9 @@
-import { LoginView } from '@/src/presentation/components/auth/LoginView';
-import { LoginPresenterFactory } from '@/src/presentation/presenters/auth/LoginPresenter';
-import type { Metadata } from 'next';
+import { LoginView } from "@/src/presentation/components/auth/LoginView";
+import { LoginPresenterFactory } from "@/src/presentation/presenters/auth/LoginPresenter";
+import type { Metadata } from "next";
 
 // Tell Next.js this is a dynamic page
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 /**
  * Generate metadata for the page
@@ -14,12 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     return presenter.generateMetadata();
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
 
     // Fallback metadata
     return {
-      title: 'เข้าสู่ระบบ | Next Edu',
-      description: 'เข้าสู่ระบบเพื่อเริ่มเรียนออนไลน์',
+      title: "เข้าสู่ระบบ | Next Edu",
+      description: "เข้าสู่ระบบเพื่อเริ่มเรียนออนไลน์",
     };
   }
 }
@@ -37,7 +37,7 @@ export default async function LoginPage() {
 
     return <LoginView initialViewModel={viewModel} />;
   } catch (error) {
-    console.error('Error fetching login data:', error);
+    console.error("Error fetching login data:", error);
 
     // Fallback UI
     return <LoginView />;

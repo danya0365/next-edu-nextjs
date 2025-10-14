@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import { useCertificatesPresenter } from '@/src/presentation/presenters/certificates/useCertificatesPresenter';
-import type { CertificatesViewModel } from '@/src/presentation/presenters/certificates/CertificatesPresenter';
-import { Award, Download, Share2, Search, X, Calendar } from 'lucide-react';
+import { useCertificatesPresenter } from "@/src/presentation/presenters/certificates/useCertificatesPresenter";
+import type { CertificatesViewModel } from "@/src/presentation/presenters/certificates/CertificatesPresenter";
+import { Award, Download, Share2, Search, X, Calendar } from "lucide-react";
 
 interface CertificatesViewProps {
   initialViewModel?: CertificatesViewModel;
-  userId?: string;
 }
 
-export function CertificatesView({ initialViewModel, userId }: CertificatesViewProps) {
+export function CertificatesView({ initialViewModel }: CertificatesViewProps) {
   const {
     viewModel,
     loading,
@@ -21,7 +20,7 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
     filteredCertificates,
     downloadCertificate,
     shareCertificate,
-  } = useCertificatesPresenter(initialViewModel, userId);
+  } = useCertificatesPresenter(initialViewModel);
 
   if (loading && !viewModel) {
     return (
@@ -38,8 +37,12 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">เกิดข้อผิดพลาด</h1>
-          <p className="text-gray-600 dark:text-gray-400">{error || 'ไม่พบข้อมูล'}</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            เกิดข้อผิดพลาด
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            {error || "ไม่พบข้อมูล"}
+          </p>
         </div>
       </div>
     );
@@ -54,10 +57,13 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Award className="w-8 h-8 text-yellow-500" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">ใบประกาศนียบัตร</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              ใบประกาศนียบัตร
+            </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
-            ดาวน์โหลดและแชร์ใบประกาศนียบัตรของคุณ (ทั้งหมด {totalCertificates} ใบ)
+            ดาวน์โหลดและแชร์ใบประกาศนียบัตรของคุณ (ทั้งหมด {totalCertificates}{" "}
+            ใบ)
           </p>
         </div>
 
@@ -82,12 +88,14 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🏆</div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-              {searchQuery ? 'ไม่พบใบประกาศนียบัตรที่ค้นหา' : 'ยังไม่มีใบประกาศนียบัตร'}
+              {searchQuery
+                ? "ไม่พบใบประกาศนียบัตรที่ค้นหา"
+                : "ยังไม่มีใบประกาศนียบัตร"}
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
               {searchQuery
-                ? 'ลองค้นหาด้วยคำอื่น'
-                : 'เรียนจบคอร์สเพื่อรับใบประกาศนียบัตร'}
+                ? "ลองค้นหาด้วยคำอื่น"
+                : "เรียนจบคอร์สเพื่อรับใบประกาศนียบัตร"}
             </p>
           </div>
         ) : (
@@ -103,7 +111,9 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
                   <h3 className="font-bold text-center text-sm line-clamp-2">
                     {cert.courseName}
                   </h3>
-                  <p className="text-xs opacity-90 mt-2">{cert.certificateNumber}</p>
+                  <p className="text-xs opacity-90 mt-2">
+                    {cert.certificateNumber}
+                  </p>
                 </div>
 
                 {/* Details */}
@@ -112,11 +122,11 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
                     <div className="flex items-center gap-2 text-sm">
                       <Calendar className="w-4 h-4 text-gray-400" />
                       <span className="text-gray-600 dark:text-gray-400">
-                        ออกให้วันที่{' '}
-                        {new Date(cert.issuedDate).toLocaleDateString('th-TH', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
+                        ออกให้วันที่{" "}
+                        {new Date(cert.issuedDate).toLocaleDateString("th-TH", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
                         })}
                       </span>
                     </div>
@@ -128,7 +138,9 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
                   {/* Skills */}
                   {cert.skillsAcquired.length > 0 && (
                     <div className="mb-4">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">ทักษะที่ได้รับ:</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                        ทักษะที่ได้รับ:
+                      </p>
                       <div className="flex flex-wrap gap-2">
                         {cert.skillsAcquired.slice(0, 3).map((skill, idx) => (
                           <span
@@ -209,23 +221,31 @@ export function CertificatesView({ initialViewModel, userId }: CertificatesViewP
 
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between items-center pb-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="text-gray-600 dark:text-gray-400">เลขที่ใบประกาศนียบัตร</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      เลขที่ใบประกาศนียบัตร
+                    </span>
                     <span className="font-mono font-semibold text-gray-900 dark:text-white">
                       {selectedCertificate.certificateNumber}
                     </span>
                   </div>
                   <div className="flex justify-between items-center pb-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="text-gray-600 dark:text-gray-400">วันที่ออกให้</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      วันที่ออกให้
+                    </span>
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {new Date(selectedCertificate.issuedDate).toLocaleDateString('th-TH', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
+                      {new Date(
+                        selectedCertificate.issuedDate
+                      ).toLocaleDateString("th-TH", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </span>
                   </div>
                   <div className="flex justify-between items-center pb-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="text-gray-600 dark:text-gray-400">ผู้สอน</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      ผู้สอน
+                    </span>
                     <span className="font-semibold text-gray-900 dark:text-white">
                       {selectedCertificate.instructorName}
                     </span>

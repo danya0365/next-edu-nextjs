@@ -1,9 +1,13 @@
-import { useCallback, useState } from 'react';
+"use client";
+
+import { useAuthStore } from "@/src/presentation/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import {
-  LearnViewModel,
   LearnPresenter,
   LearnPresenterFactory,
-} from './LearnPresenter';
+  LearnViewModel,
+} from "./LearnPresenter";
 
 let presenterInstance: LearnPresenter | null = null;
 
@@ -18,14 +22,14 @@ export interface LearnPresenterHook {
   viewModel: LearnViewModel | null;
   loading: boolean;
   error: string | null;
-  
+
   // Video player state
   isPlaying: boolean;
   currentTime: number;
   duration: number;
   volume: number;
   playbackRate: number;
-  
+
   // Actions
   togglePlay: () => void;
   seek: (time: number) => void;
@@ -41,9 +45,11 @@ export interface LearnPresenterHook {
  */
 export function useLearnPresenter(
   initialViewModel: LearnViewModel | null = null,
-  courseId: string = '',
+  courseId: string = "",
   lessonId?: string
 ): LearnPresenterHook {
+  const { isAuthenticated, user } = useAuthStore();
+  const router = useRouter();
   const [viewModel] = useState<LearnViewModel | null>(initialViewModel || null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,6 +60,13 @@ export function useLearnPresenter(
   const [duration, setDuration] = useState(0);
   const [volume, setVolumeState] = useState(1);
   const [playbackRate, setPlaybackRateState] = useState(1);
+
+  // Check authentication
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
 
   /**
    * Toggle play/pause
@@ -87,7 +100,7 @@ export function useLearnPresenter(
    * Mark lesson as complete
    */
   const markComplete = useCallback(async () => {
-    if (!viewModel?.currentLesson) return;
+    if (!user?.id || !viewModel?.currentLesson) return;
 
     setLoading(true);
     setError(null);
@@ -95,17 +108,17 @@ export function useLearnPresenter(
     try {
       const presenter = await getPresenter();
       await presenter.markLessonComplete(courseId, viewModel.currentLesson.id);
-      
+
       // In real app, refresh data here
-      console.log('Lesson marked as complete');
+      console.log("Lesson marked as complete");
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
       setError(errorMessage);
-      console.error('Error marking lesson complete:', err);
+      console.error("Error marking lesson complete:", err);
     } finally {
       setLoading(false);
     }
-  }, [viewModel, courseId]);
+  }, [viewModel, courseId, user?.id]);
 
   /**
    * Go to next lesson

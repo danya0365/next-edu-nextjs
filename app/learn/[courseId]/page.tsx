@@ -1,10 +1,10 @@
-import { LearnView } from '@/src/presentation/components/learn/LearnView';
-import { LearnPresenterFactory } from '@/src/presentation/presenters/learn/LearnPresenter';
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import { LearnView } from "@/src/presentation/components/learn/LearnView";
+import { LearnPresenterFactory } from "@/src/presentation/presenters/learn/LearnPresenter";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 // Tell Next.js this is a dynamic page
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface LearnPageProps {
   params: Promise<{ courseId: string }>;
@@ -14,20 +14,26 @@ interface LearnPageProps {
 /**
  * Generate metadata for the page
  */
-export async function generateMetadata({ params, searchParams }: LearnPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: LearnPageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const resolvedSearchParams = searchParams ? await searchParams : {};
   const presenter = await LearnPresenterFactory.create();
 
   try {
-    return presenter.generateMetadata(resolvedParams.courseId, resolvedSearchParams.lesson);
+    return presenter.generateMetadata(
+      resolvedParams.courseId,
+      resolvedSearchParams.lesson
+    );
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
 
     // Fallback metadata
     return {
-      title: 'เรียน | Next Edu',
-      description: 'เรียนคอร์สออนไลน์',
+      title: "เรียน | Next Edu",
+      description: "เรียนคอร์สออนไลน์",
     };
   }
 }
@@ -36,7 +42,10 @@ export async function generateMetadata({ params, searchParams }: LearnPageProps)
  * Learn/Player page - Server Component for SEO optimization
  * Uses presenter pattern following Clean Architecture
  */
-export default async function LearnPage({ params, searchParams }: LearnPageProps) {
+export default async function LearnPage({
+  params,
+  searchParams,
+}: LearnPageProps) {
   const resolvedParams = await params;
   const resolvedSearchParams = searchParams ? await searchParams : {};
   const presenter = await LearnPresenterFactory.create();
@@ -55,7 +64,9 @@ export default async function LearnPage({ params, searchParams }: LearnPageProps
           <div className="text-center p-8">
             <div className="text-6xl mb-4">😕</div>
             <h1 className="text-2xl font-bold text-white mb-2">ไม่พบคอร์ส</h1>
-            <p className="text-gray-400 mb-6">คอร์สนี้อาจถูกลบหรือไม่มีอยู่ในระบบ</p>
+            <p className="text-gray-400 mb-6">
+              คอร์สนี้อาจถูกลบหรือไม่มีอยู่ในระบบ
+            </p>
             <Link
               href="/courses"
               className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
@@ -76,7 +87,7 @@ export default async function LearnPage({ params, searchParams }: LearnPageProps
       />
     );
   } catch (error) {
-    console.error('Error fetching learn data:', error);
+    console.error("Error fetching learn data:", error);
 
     // Fallback UI
     return (

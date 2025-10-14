@@ -30,8 +30,19 @@ export interface SettingsViewModel {
   settings: UserSettings;
 }
 
+/**
+ * Presenter for Settings management
+ * Follows Clean Architecture with proper separation of concerns
+ */
 export class SettingsPresenter {
-  static async getViewModel(userId: string): Promise<SettingsViewModel> {
+  constructor() {
+    // Mock data - no supabase client needed
+  }
+
+  /**
+   * Get view model for the page
+   */
+  async getViewModel(userId: string): Promise<SettingsViewModel> {
     // Get student data
     const student = students.find((s) => s.userId === userId);
     if (!student) {
@@ -71,16 +82,30 @@ export class SettingsPresenter {
   }
 }
 
-// Server-side factory
-export class ServerSettingsPresenterFactory {
-  static async create(userId: string): Promise<SettingsViewModel> {
-    return SettingsPresenter.getViewModel(userId);
+/**
+ * Factory for creating SettingsPresenter instances
+ */
+export class SettingsPresenterFactory {
+  static async createServer(): Promise<SettingsPresenter> {
+    return new SettingsPresenter();
+  }
+
+  static async createClient(): Promise<SettingsPresenter> {
+    return new SettingsPresenter();
   }
 }
 
-// Client-side factory
+// Backward compatibility exports
+export class ServerSettingsPresenterFactory {
+  static async create(userId: string): Promise<SettingsViewModel> {
+    const presenter = await SettingsPresenterFactory.createServer();
+    return presenter.getViewModel(userId);
+  }
+}
+
 export class ClientSettingsPresenterFactory {
   static async create(userId: string): Promise<SettingsViewModel> {
-    return SettingsPresenter.getViewModel(userId);
+    const presenter = await SettingsPresenterFactory.createClient();
+    return presenter.getViewModel(userId);
   }
 }

@@ -122,9 +122,9 @@ Status Colors:
 
 ### Priority 2 - User Pages (Week 5-6)
 - [x] 👤 **Student Dashboard** (`/dashboard/student`) - ✅ เสร็จแล้ว
-- [ ] 👨‍🏫 **Instructor Dashboard** (`/dashboard/instructor`) - แดชบอร์ดครู
+- [x] 👨‍🏫 **Instructor Dashboard** (`/dashboard/instructor`) - ✅ เสร็จแล้ว
 - [x] 🔐 **Authentication** (`/login`, `/register`) - ✅ เสร็จแล้ว
-- [ ] 🔐 **Forgot Password** (`/forgot-password`)
+- [x] 🔐 **Forgot Password** (`/forgot-password`) - ✅ เสร็จแล้ว
 - [x] 👤 **Profile** (`/profile`) - ✅ เสร็จแล้ว
 
 ### Priority 3 - Additional Pages (Week 7-8)
@@ -455,7 +455,7 @@ Status Colors:
 - ✅ Contact page (form, contact info, social links)
 - ✅ FAQ page (16 FAQs, 5 categories, search, expand/collapse)
 
-**Platform Status: 19 pages complete! 🚀🎉✨**
+**Platform Status: 21 pages complete! 🚀🎉✨🎊**
 
 **Dashboard Sub-pages: ครบทั้งหมด! ✅**
 - ✅ My Courses (`/dashboard/student/courses`) - พร้อม Master & Mock Data!
@@ -483,10 +483,11 @@ Status Colors:
 - ✅ quizzes.mock
 
 **NEXT Steps:**
-- 🔄 Instructor Dashboard
 - 🔄 Video player integration (HTML5 video)
 - 🔄 Quiz system UI
 - 🔄 Supabase integration (auth, database)
+- 🔄 Community/Forum (optional)
+- 🔄 Live Classes (optional)
 
 **READY FOR:** 
 ✅ User testing

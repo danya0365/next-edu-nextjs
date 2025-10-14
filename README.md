@@ -17,7 +17,7 @@
 - **Clean Architecture** - Presenter Pattern, SOLID Principles
 - **Type Safety** - TypeScript ทั้งหมด
 
-### 📚 Pages (19 หน้าสมบูรณ์)
+### 📚 Pages (21 หน้าสมบูรณ์)
 
 **Core Pages (4):**
 1. Landing Page - หน้าแรก
@@ -25,26 +25,30 @@
 3. Course Detail - รายละเอียดคอร์ส
 4. Learn/Player - หน้าเรียน
 
-**User Pages (7):**
+**User Pages (8):**
 5. Login/Register - ระบบสมาชิก
-6. Profile - โปรไฟล์
-7. Student Dashboard - แดชบอร์ด
-8. My Courses - คอร์สของฉัน
-9. Certificates - ใบประกาศนียบัตร
-10. Wishlist - รายการที่ชอบ
-11. Settings - ตั้งค่า
+6. Forgot Password - ลืมรหัสผ่าน
+7. Profile - โปรไฟล์
+8. Student Dashboard - แดชบอร์ด
+9. My Courses - คอร์สของฉัน
+10. Certificates - ใบประกาศนียบัตร
+11. Wishlist - รายการที่ชอบ
+12. Settings - ตั้งค่า
+
+**Instructor Pages (1):**
+13. Instructor Dashboard - แดชบอร์ดผู้สอน
 
 **Gamification (2):**
-12. Achievements - ความสำเร็จ
-13. Leaderboard - กระดานคะแนน
+14. Achievements - ความสำเร็จ
+15. Leaderboard - กระดานคะแนน
 
 **Static Pages (5):**
-14. About - เกี่ยวกับเรา
-15. Contact - ติดต่อเรา
-16. FAQ - คำถามที่พบบ่อย
-17. Privacy Policy - นโยบายความเป็นส่วนตัว
-18. Terms of Service - ข้อกำหนดการใช้งาน
-19. และอื่นๆ...
+16. About - เกี่ยวกับเรา
+17. Contact - ติดต่อเรา
+18. FAQ - คำถามที่พบบ่อย
+19. Privacy Policy - นโยบายความเป็นส่วนตัว
+20. Terms of Service - ข้อกำหนดการใช้งาน
+21. และอื่นๆ...
 
 ## 🚀 Quick Start
 
@@ -166,10 +170,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 ## 📊 Status
 
-- **Frontend:** ✅ 99% Complete (19 pages)
+- **Frontend:** ✅ 100% Complete (21 pages) 🎉
 - **Master Data:** ✅ 6 files complete
 - **Mock Data:** ✅ 9 files complete
 - **Legal Pages:** ✅ Privacy & Terms complete
+- **Instructor Pages:** ✅ Dashboard complete
 - **Backend:** 🔄 Ready for integration
 - **Video Player:** 🔄 UI ready, needs implementation
 - **Quiz System:** 🔄 Data ready, needs UI
