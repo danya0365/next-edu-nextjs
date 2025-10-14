@@ -325,7 +325,7 @@ export class [PageName]PresenterFactory {
     );
   }
 
-  static async createClient(): Promise<[PageName]Presenter> {
+  static createClient(): [PageName]Presenter {
     const supabase = createClientSupabaseClient();
     return new [PageName]Presenter(
       supabase,
