@@ -133,7 +133,8 @@ Status Colors:
 - [x] 📄 **About** (`/about`) - ✅ เสร็จแล้ว
 - [x] 📄 **Contact** (`/contact`) - ✅ เสร็จแล้ว
 - [x] 📄 **FAQ** (`/faq`) - ✅ เสร็จแล้ว
-- [ ] 📄 **Privacy, Terms** (`/privacy`, `/terms`)
+- [x] 📄 **Privacy** (`/privacy`) - ✅ เสร็จแล้ว
+- [x] 📄 **Terms** (`/terms`) - ✅ เสร็จแล้ว
 
 ### Priority 4 - Advanced Features (Week 9+)
 - [ ] 💬 **Community** (`/community`) - ชุมชน
@@ -454,7 +455,7 @@ Status Colors:
 - ✅ Contact page (form, contact info, social links)
 - ✅ FAQ page (16 FAQs, 5 categories, search, expand/collapse)
 
-**Platform Status: 17 pages complete! 🚀🎉**
+**Platform Status: 19 pages complete! 🚀🎉✨**
 
 **Dashboard Sub-pages: ครบทั้งหมด! ✅**
 - ✅ My Courses (`/dashboard/student/courses`) - พร้อม Master & Mock Data!
@@ -486,7 +487,6 @@ Status Colors:
 - 🔄 Video player integration (HTML5 video)
 - 🔄 Quiz system UI
 - 🔄 Supabase integration (auth, database)
-- 🔄 Privacy & Terms pages
 
 **READY FOR:** 
 ✅ User testing
