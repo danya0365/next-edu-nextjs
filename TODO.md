@@ -326,9 +326,10 @@ Status Colors:
 - [x] Course Detail page (`/courses/[slug]`) ✅
 - [x] Layout (Navbar + Footer) ✅
 - [x] Dark Mode ✅
-- [ ] Learn/Player page (`/learn/[courseId]`)
-- [ ] Basic video player
-- [ ] Basic quiz system
+- [x] Learn/Player page (`/learn/[courseId]`) ✅
+- [x] Basic video player UI ✅
+- [ ] Video player integration (HTML5 video)
+- [ ] Quiz system implementation
 
 ### Sprint 3: User Features (Week 5-6)
 - [ ] Student Dashboard
@@ -425,7 +426,7 @@ Status Colors:
 
 ## 🎯 Current Focus
 
-**NOW:** Sprint 2 - Core Pages (Week 3-4)
+**NOW:** Sprint 2 - Core Pages (Week 3-4) - COMPLETE!
 - ✅ Landing page complete
 - ✅ Master Data complete (6 files)
 - ✅ Mock Data complete (9 files)
@@ -433,7 +434,9 @@ Status Colors:
 - ✅ Course Detail page complete
 - ✅ Layout (Navbar + Footer) complete
 - ✅ Dark Mode complete
-- 🔄 Next: Learn/Player page
+- ✅ Learn/Player page complete
+- 🔄 Next: Video player integration
+- 🔄 Next: Quiz system
 - 🔄 Next: Setup Zustand + localforage
 
 **NEXT:** Sprint 2 - Core Pages (Week 3-4)
