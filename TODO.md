@@ -322,7 +322,7 @@ Status Colors:
 - [ ] Design system (colors, fonts, components)
 
 ### Sprint 2: Core Pages (Week 3-4)
-- [ ] Browse Courses page (`/courses`)
+- [x] Browse Courses page (`/courses`) ✅
 - [ ] Course Detail page (`/courses/[id]`)
 - [ ] Learn/Player page (`/learn/[courseId]`)
 - [ ] Basic video player
