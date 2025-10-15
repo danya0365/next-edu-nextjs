@@ -203,9 +203,7 @@ export function InstructorDashboardView({
                 <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  ดู
-                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">ดู</p>
                 <p className="text-lg font-bold text-gray-900 dark:text-white">
                   นักเรียน
                 </p>
@@ -241,9 +239,7 @@ export function InstructorDashboardView({
                 <DollarSign className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  ดู
-                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">ดู</p>
                 <p className="text-lg font-bold text-gray-900 dark:text-white">
                   รายได้
                 </p>
@@ -457,8 +453,8 @@ export function InstructorDashboardView({
                 </p>
               ) : (
                 <div className="space-y-4">
-                  {recentStudents.map((student) => (
-                    <div key={student.id} className="flex items-center gap-3">
+                  {recentStudents.map((student, index) => (
+                    <div key={index} className="flex items-center gap-3">
                       <ImageWithFallback
                         src={student.avatar}
                         alt={student.name}

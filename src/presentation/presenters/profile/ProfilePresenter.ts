@@ -1,5 +1,6 @@
 import { students, type Student } from '@/src/data/mock/students.mock';
-import { getCourseById } from '@/src/data/mock/courses.mock';
+import { instructors, type Instructor } from '@/src/data/mock/instructors.mock';
+import { getCourseById, courses } from '@/src/data/mock/courses.mock';
 import type { Metadata } from 'next';
 
 export interface EnrichedStudent extends Student {
@@ -15,6 +16,20 @@ export interface EnrichedStudent extends Student {
     title: string;
     slug: string;
     thumbnail: string;
+  }>;
+}
+
+export interface EnrichedInstructor extends Instructor {
+  teachingCoursesData: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    thumbnail: string;
+    studentCount: number;
+    rating: number;
+    reviewCount: number;
+    price: number;
+    status: 'draft' | 'published' | 'archived';
   }>;
 }
 
@@ -83,6 +98,38 @@ export class ProfilePresenter {
       ...student,
       enrolledCoursesData,
       completedCoursesData,
+    };
+  }
+
+  /**
+   * Get instructor data by userId
+   * This is a static helper for client-side use
+   */
+  static getInstructorData(userId: string): EnrichedInstructor | null {
+    const instructor = instructors.find((i) => i.userId === userId);
+    
+    if (!instructor) {
+      return null;
+    }
+
+    // Get all courses taught by this instructor
+    const teachingCoursesData = courses
+      .filter((course) => course.instructorId === instructor.id)
+      .map((course) => ({
+        id: course.id,
+        title: course.title,
+        slug: course.slug,
+        thumbnail: course.thumbnail,
+        studentCount: course.studentCount,
+        rating: course.rating,
+        reviewCount: course.reviewCount,
+        price: course.price,
+        status: course.status,
+      }));
+
+    return {
+      ...instructor,
+      teachingCoursesData,
     };
   }
 

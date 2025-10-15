@@ -1,4 +1,4 @@
-import { ProfileView } from "@/src/presentation/components/profile/ProfileView";
+import { ProfileViewSelector } from "@/src/presentation/components/profile/ProfileViewSelector";
 import { ProfilePresenterFactory } from "@/src/presentation/presenters/profile/ProfilePresenter";
 import type { Metadata } from "next";
 
@@ -27,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /**
  * Profile page - Server Component for SEO optimization
  * Uses presenter pattern following Clean Architecture
+ * Automatically shows the appropriate view based on user role
  */
 export default async function ProfilePage() {
   const presenter = await ProfilePresenterFactory.create();
@@ -35,11 +36,11 @@ export default async function ProfilePage() {
     // Get view model from presenter
     const viewModel = await presenter.getViewModel();
 
-    return <ProfileView initialViewModel={viewModel} />;
+    return <ProfileViewSelector initialViewModel={viewModel} />;
   } catch (error) {
     console.error("Error fetching profile data:", error);
 
     // Fallback UI
-    return <ProfileView />;
+    return <ProfileViewSelector />;
   }
 }
